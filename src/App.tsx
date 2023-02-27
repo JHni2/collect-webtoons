@@ -3,6 +3,8 @@ import './assets/css/tailwind.css'
 import './assets/css/style.css'
 import ScrollToTop from './helpers/helpers'
 import Join from './pages/Join'
+import {} from 'firebase/firestore'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
           {/* <Route path='*' element={<Error/>}/> */}
           {/* <Route path='/' element={<Index/>}/> */}
           <Route path="/join" element={<Join />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </section>
     </BrowserRouter>

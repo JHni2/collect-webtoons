@@ -1,13 +1,15 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../contexxt/UserContext'
 import { auth } from '../firebase'
 
 export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
   const [checked, setChecked] = useState(false)
   const navigate = useNavigate()
+  const { user, setUser } = useContext(UserContext)
 
   const {
     register,
@@ -24,6 +26,9 @@ export default function LoginPage(): JSX.Element {
           localStorage.setItem('loggedInfo', data.email)
         }
         navigate('/')
+        setUser({
+          email: data.email,
+        })
       })
       .catch((e) => {
         console.log(e.code)

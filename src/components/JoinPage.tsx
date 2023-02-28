@@ -16,7 +16,7 @@ export default function JoinPage(): JSX.Element {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = async (data: any, e: any) => {
+  const onSubmit = async (data: any) => {
     setErrorMsg('')
     const q = query(collection(db, 'user'), where('nickname', '==', data.nickname))
     const querySnapshot = await getDocs(q)

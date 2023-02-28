@@ -6,20 +6,23 @@ import Join from './pages/Join'
 import {} from 'firebase/firestore'
 import Login from './pages/Login'
 import Index from './pages/Index'
+import UserProvider from './contexxt/UserContext'
 
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <section className="drawer-content">
-        {/* <Nav/> */}
-        <Routes>
-          {/* <Route path='*' element={<Error/>}/> */}
-          <Route path="/" element={<Index />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </section>
+      <UserProvider>
+        <ScrollToTop />
+        <section className="drawer-content">
+          {/* <Nav/> */}
+          <Routes>
+            {/* <Route path='*' element={<Error/>}/> */}
+            <Route path="/" element={<Index />} />
+            <Route path="/join" element={<Join />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </section>
+      </UserProvider>
     </BrowserRouter>
   )
 }

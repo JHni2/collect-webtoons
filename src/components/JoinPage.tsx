@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword } from '@firebase/auth'
+import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
 
 export default function JoinPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
@@ -15,11 +16,22 @@ export default function JoinPage(): JSX.Element {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any, e: any) => {
     setErrorMsg('')
+    const q = query(collection(db, 'user'), where('nickname', '==', data.nickname))
+    const querySnapshot = await getDocs(q)
+    if (querySnapshot.docs.length > 0) {
+      setErrorMsg('이미 사용중인 닉네임입니다.')
+      return
+    }
+
     await createUserWithEmailAndPassword(auth, data.email, data.pw)
       .then(() => {
         navigate('/login')
+        addDoc(collection(db, 'user'), {
+          email: data.email,
+          nickname: data.nickname,
+        })
       })
       .catch((e) => {
         if (e.code == 'auth/email-already-in-use') {
@@ -28,7 +40,6 @@ export default function JoinPage(): JSX.Element {
       })
   }
 
-  console.log(errors)
   const pwRef = useRef()
   pwRef.current = watch('pw')
 
@@ -56,7 +67,9 @@ export default function JoinPage(): JSX.Element {
           {errors.email && errors.email.type === 'pattern' && (
             <div className="text-red-500	text-sm">이메일 형식이 올바르지 않습니다.</div>
           )}
-          {errorMsg && <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>}
+          {errorMsg == '이미 사용중인 이메일입니다.' && (
+            <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>
+          )}
         </div>
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
@@ -118,6 +131,9 @@ export default function JoinPage(): JSX.Element {
           )}
           {errors.nickname && errors.nickname.type === 'maxLength' && (
             <div className="text-red-500	text-sm">최대 6자만 입력할 수 있습니다.</div>
+          )}
+          {errorMsg == '이미 사용중인 닉네임입니다.' && (
+            <div className="text-red-500	text-sm">이미 사용중인 닉네임입니다.</div>
           )}
         </div>
         <div className="mt-6">

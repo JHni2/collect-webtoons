@@ -1,11 +1,13 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
 
 export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
+  const [checked, setChecked] = useState(false)
+  const navigate = useNavigate()
 
   const {
     register,
@@ -17,7 +19,11 @@ export default function LoginPage(): JSX.Element {
     setErrorMsg('')
     await signInWithEmailAndPassword(auth, data.email, data.pw)
       .then(() => {
-        alert('로그인 성공')
+        if (checked) {
+          localStorage.clear()
+          localStorage.setItem('loggedInfo', data.email)
+        }
+        navigate('/')
       })
       .catch((e) => {
         console.log(e.code)
@@ -66,6 +72,18 @@ export default function LoginPage(): JSX.Element {
           {errorMsg && (
             <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>
           )}
+        </div>
+        <div className="keep_check relative pl-6 leading-4">
+          <input
+            value={checked ? 'on' : 'off'}
+            id="keep"
+            className="input_keep appearance-none"
+            type="checkbox"
+            onChange={() => setChecked(!checked)}
+          ></input>
+          <label htmlFor="keep" className="keep_text cursor-pointer">
+            로그인 상태 유지
+          </label>
         </div>
         <div className="mt-6">
           <button className="min-h-[46px] mb-5 rounded-[10px] w-full bg-neutral-300/70">

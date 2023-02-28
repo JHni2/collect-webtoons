@@ -35,3 +35,22 @@
   margin-left:10px;
   background-color: rgb(212 212 212/35%);
 }
+
+input[value='on']::before,
+input[value='off']::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+}
+
+input[value='off']::before{
+  background-image: url('./imgs/check-circle.svg');
+}
+
+input[value='on']::before{
+  background-image: url('./imgs/check-circle-fill.svg');
+}

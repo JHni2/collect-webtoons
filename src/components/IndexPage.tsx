@@ -1,4 +1,4 @@
-import { query, collection, where, getDocs } from 'firebase/firestore'
+import { query, collection, where, getDocs, DocumentData } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -11,14 +11,14 @@ export default function IndexPage() {
   const findUserInfo = async () => {
     const q = query(collection(db, 'user'), where('email', '==', loggedInfo))
     const querySnapshot = await getDocs(q)
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((doc: DocumentData) => {
       setUser(doc.data())
     })
   }
 
   useEffect(() => {
     findUserInfo()
-    loggedInfo && setUser({ email: loggedInfo, nickname: '', wishList: '' })
+    // loggedInfo && setUser({ email: loggedInfo, nickname: '', wishList: '' })
   }, [])
 
   console.log(user)
@@ -33,7 +33,7 @@ export default function IndexPage() {
       <h2 className="font-bold">메인 페이지 {user.nickname} </h2>
       <div className="flex flex-col mt-5 gap-1">
         {user.email.length === 0 ? (
-          <div>
+          <div className="flex flex-col gap-2">
             <Link to="login">로그인</Link>
             <Link to="join">회원가입</Link>
           </div>

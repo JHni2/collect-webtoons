@@ -1,35 +1,49 @@
+import { query, collection, where, getDocs } from 'firebase/firestore'
+import { db } from '../firebase'
 import { useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../contexxt/UserContext'
 
 export default function IndexPage() {
   const { user, setUser } = useContext(UserContext)
   const loggedInfo = localStorage.getItem('loggedInfo')
-  const navigate = useNavigate()
+
+  const findUserInfo = async () => {
+    const q = query(collection(db, 'user'), where('email', '==', loggedInfo))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      setUser(doc.data())
+    })
+  }
 
   useEffect(() => {
-    loggedInfo && setUser({ email: loggedInfo })
+    findUserInfo()
+    loggedInfo && setUser({ email: loggedInfo, nickname: '', wishList: '' })
   }, [])
 
-  const handleClick = () => {
+  console.log(user)
+
+  const handleLogOut = () => {
     localStorage.clear()
     window.location.href = '/'
   }
 
   return (
     <div id="content">
-      <h2 className="font-bold">메인 페이지 {user.email}</h2>
+      <h2 className="font-bold">메인 페이지 {user.nickname} </h2>
       <div className="flex flex-col mt-5 gap-1">
         {user.email.length === 0 ? (
-          <Link to="login">로그인</Link>
+          <div>
+            <Link to="login">로그인</Link>
+            <Link to="join">회원가입</Link>
+          </div>
         ) : (
           <div>
-            <div className="cursor-pointer" onClick={handleClick}>
+            <div className="cursor-pointer" onClick={handleLogOut}>
               로그아웃
             </div>
           </div>
         )}
-        <Link to="join">회원가입</Link>
       </div>
     </div>
   )

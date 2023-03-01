@@ -7,6 +7,8 @@ import { UserContext } from '../contexxt/UserContext'
 export default function IndexPage() {
   const { user, setUser } = useContext(UserContext)
   const loggedInfo = localStorage.getItem('loggedInfo')
+    ? localStorage.getItem('loggedInfo')
+    : sessionStorage.getItem('loggedInfo')
 
   const findUserInfo = async () => {
     const q = query(collection(db, 'user'), where('email', '==', loggedInfo))
@@ -25,6 +27,7 @@ export default function IndexPage() {
 
   const handleLogOut = () => {
     localStorage.clear()
+    sessionStorage.clear()
     window.location.href = '/'
   }
 

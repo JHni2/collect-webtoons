@@ -8,8 +8,11 @@ import { auth } from '../firebase'
 export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
   const [checked, setChecked] = useState(false)
-  const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
+
+  const sessionStorage = window.sessionStorage
+
+  const navigate = useNavigate()
 
   const {
     register,
@@ -24,10 +27,14 @@ export default function LoginPage(): JSX.Element {
         if (checked) {
           localStorage.clear()
           localStorage.setItem('loggedInfo', data.email)
+        } else {
+          sessionStorage.setItem('loggedInfo', data.email)
         }
         navigate('/')
         setUser({
           email: data.email,
+          nickname: '',
+          wishList: '',
         })
       })
       .catch((e) => {

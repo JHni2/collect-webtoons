@@ -6,7 +6,7 @@ import Join from './pages/Join'
 import {} from 'firebase/firestore'
 import Login from './pages/Login'
 import Index from './pages/Index'
-import UserProvider from './contexxt/UserContext'
+import UserProvider from './context/UserContext'
 
 function App() {
   return (

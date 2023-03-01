@@ -8,7 +8,11 @@ module.exports = {
       xl: '1280px',
       xl2: '1360px',
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        google: "url('./imgs/google.svg')",
+      },
+    },
   },
   plugins: [],
 }

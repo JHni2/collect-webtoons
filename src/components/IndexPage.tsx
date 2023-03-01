@@ -1,8 +1,9 @@
 import { query, collection, where, getDocs, DocumentData } from 'firebase/firestore'
-import { db } from '../firebase'
+import { auth, db } from '../firebase'
 import { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexxt/UserContext'
+import { UserContext } from '../context/UserContext'
+import { signOut } from 'firebase/auth'
 
 export default function IndexPage() {
   const { user, setUser } = useContext(UserContext)
@@ -23,9 +24,14 @@ export default function IndexPage() {
     // loggedInfo && setUser({ email: loggedInfo, nickname: '', wishList: '' })
   }, [])
 
-  console.log(user)
-
   const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('sign Out')
+      })
+      .catch((e) => {
+        console.log(e)
+      })
     localStorage.clear()
     sessionStorage.clear()
     window.location.href = '/'

@@ -1,9 +1,10 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../contexxt/UserContext'
-import { auth } from '../firebase'
+import { UserContext } from '../context/UserContext'
+import { auth, db } from '../firebase'
 
 export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
@@ -30,18 +31,46 @@ export default function LoginPage(): JSX.Element {
         } else {
           sessionStorage.setItem('loggedInfo', data.email)
         }
-        navigate('/')
         setUser({
           email: data.email,
           nickname: '',
           wishList: '',
         })
+        navigate('/')
       })
       .catch((e) => {
         console.log(e.code)
         if (e.code == 'auth/wrong-password' || e.code == 'auth/user-not-found') {
           setErrorMsg('이메일 또는 비밀번호를 잘못 입력했습니다.')
         }
+      })
+  }
+
+  const handleGoogleLogin = () => {
+    const provider = new GoogleAuthProvider()
+    signInWithPopup(auth, provider)
+      .then(async (data) => {
+        const q = query(collection(db, 'user'), where('email', '==', data.user.email))
+        const querySnapshot = await getDocs(q)
+        if (querySnapshot.docs.length === 0) {
+          addDoc(collection(db, 'user'), {
+            email: data.user.email,
+            nickname: data.user.displayName,
+            wishList: '',
+          })
+        }
+        data.user.email &&
+          data.user.displayName &&
+          setUser({
+            email: data.user.email,
+            nickname: data.user.displayName,
+            wishList: '',
+          })
+        data.user.email && sessionStorage.setItem('loggedInfo', data.user.email)
+        navigate('/')
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -102,10 +131,17 @@ export default function LoginPage(): JSX.Element {
             <span className="font-semibold">로그인</span>
           </button>
           <Link to="/join">
-            <button className="min-h-[46px] rounded-[10px] w-full bg-neutral-300/70">
+            <button className="min-h-[46px] mb-10  rounded-[10px] w-full border border-neutral-300/70">
               <span className="font-semibold">회원가입</span>
             </button>
           </Link>
+          <button
+            className="min-h-[46px] rounded-[10px] w-full border border-neutral-300/70 bg-google bg-no-repeat bg-contain p-2.5  bg-origin-content	"
+            type="button"
+            onClick={handleGoogleLogin}
+          >
+            <span className="font-semibold ">구글 로그인</span>
+          </button>
         </div>
       </form>
     </div>

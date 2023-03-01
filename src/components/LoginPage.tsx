@@ -142,6 +142,11 @@ export default function LoginPage(): JSX.Element {
           >
             <span className="font-semibold ">구글 로그인</span>
           </button>
+          <div className="mt-6 flex justify-center">
+            <Link to="/" className="min-h-[46px]">
+              <span className="text-xs">메인 페이지로 이동</span>
+            </Link>
+          </div>
         </div>
       </form>
     </div>

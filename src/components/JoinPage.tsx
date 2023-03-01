@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { auth, db } from '../firebase'
 
 export default function JoinPage(): JSX.Element {
@@ -140,6 +140,11 @@ export default function JoinPage(): JSX.Element {
           <button className="min-h-[46px] rounded-[10px] w-full bg-neutral-300/70">
             <span className="font-semibold">가입하기</span>
           </button>
+        </div>
+        <div className="mt-6 flex justify-center">
+          <Link to="/" className="min-h-[46px]">
+            <span className="text-xs">메인 페이지로 이동</span>
+          </Link>
         </div>
       </form>
     </div>

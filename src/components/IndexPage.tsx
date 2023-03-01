@@ -1,4 +1,4 @@
-import { query, collection, where, getDocs, DocumentData } from 'firebase/firestore'
+import { query, collection, where, getDocs, DocumentData, addDoc } from 'firebase/firestore'
 import { auth, db } from '../firebase'
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -41,10 +41,9 @@ export default function IndexPage() {
     sessionStorage.clear()
     window.location.href = '/'
   }
-  const state = { Loading: true }
 
   return (
-    <div id="content">
+    <div className="relative top-20" id="content">
       {loading ? (
         <Loading />
       ) : (

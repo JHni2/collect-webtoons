@@ -72,12 +72,14 @@ export default function Header(): JSX.Element {
             </div>
           </div>
           {user.email.length > 0 ? (
-            <div ref={modalRef} className="cursor-pointer p-1 hover:text-black" onClick={() => setIsOpen(!isOpen)}>
-              {user.nickname} ▾
+            <div ref={modalRef} className="p-1">
+              <div className="cursor-pointer hover:text-black" onClick={() => setIsOpen(!isOpen)}>
+                {user.nickname} ▾
+              </div>
               <UserModal />
             </div>
           ) : (
-            <div>
+            <div className="mr-2">
               <Link to="login" className="cursor-pointer">
                 로그인
               </Link>

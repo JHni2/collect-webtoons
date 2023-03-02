@@ -76,7 +76,7 @@ export default function LoginPage(): JSX.Element {
 
   return (
     <div id="content">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[460px]">
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>
@@ -109,7 +109,7 @@ export default function LoginPage(): JSX.Element {
           {errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
         </div>
         <div className="keep_check relative pl-6 leading-4">
-          <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none" type="checkbox" onChange={() => setChecked(!checked)}></input>
+          <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none cursor-pointer" type="checkbox" onChange={() => setChecked(!checked)}></input>
           <label htmlFor="keep" className="keep_text cursor-pointer">
             로그인 상태 유지
           </label>

@@ -6,7 +6,7 @@ import { UserModalContext } from '../context/UserModalContext'
 import { auth } from '../firebase'
 
 export default function UserMdal(): JSX.Element {
-  const { isOpen, setIsOpen } = useContext(UserModalContext)
+  const { isOpen } = useContext(UserModalContext)
   const { user } = useContext(UserInfoContext)
 
   const handleLogOut = () => {

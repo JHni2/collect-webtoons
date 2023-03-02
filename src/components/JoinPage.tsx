@@ -45,7 +45,7 @@ export default function JoinPage(): JSX.Element {
 
   return (
     <div id="content">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[460px]">
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>
@@ -61,15 +61,9 @@ export default function JoinPage(): JSX.Element {
               })}
             ></input>
           </div>
-          {errors.email && errors.email.type === 'required' && (
-            <div className="text-red-500	text-sm">이메일을 입력해 주세요.</div>
-          )}
-          {errors.email && errors.email.type === 'pattern' && (
-            <div className="text-red-500	text-sm">이메일 형식이 올바르지 않습니다.</div>
-          )}
-          {errorMsg == '이미 사용중인 이메일입니다.' && (
-            <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>
-          )}
+          {errors.email && errors.email.type === 'required' && <div className="text-red-500	text-sm">이메일을 입력해 주세요.</div>}
+          {errors.email && errors.email.type === 'pattern' && <div className="text-red-500	text-sm">이메일 형식이 올바르지 않습니다.</div>}
+          {errorMsg == '이미 사용중인 이메일입니다.' && <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>}
         </div>
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
@@ -84,12 +78,8 @@ export default function JoinPage(): JSX.Element {
               minLength: 6,
             })}
           ></input>
-          {errors.pw && errors.pw.type === 'required' && (
-            <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>
-          )}
-          {errors.pw && errors.pw.type === 'minLength' && (
-            <div className="text-red-500	text-sm">6자 이상 입력해주세요.</div>
-          )}
+          {errors.pw && errors.pw.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
+          {errors.pw && errors.pw.type === 'minLength' && <div className="text-red-500	text-sm">6자 이상 입력해주세요.</div>}
         </div>
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
@@ -104,12 +94,8 @@ export default function JoinPage(): JSX.Element {
               validate: (value) => value === pwRef.current,
             })}
           ></input>
-          {errors.pw_check && errors.pw_check.type === 'required' && (
-            <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>
-          )}
-          {errors.pw_check && errors.pw_check.type === 'validate' && (
-            <div className="text-red-500	text-sm">비밀번호가 다릅니다.</div>
-          )}
+          {errors.pw_check && errors.pw_check.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
+          {errors.pw_check && errors.pw_check.type === 'validate' && <div className="text-red-500	text-sm">비밀번호가 다릅니다.</div>}
         </div>
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
@@ -126,15 +112,9 @@ export default function JoinPage(): JSX.Element {
               })}
             ></input>
           </div>
-          {errors.nickname && errors.nickname.type === 'required' && (
-            <div className="text-red-500	text-sm">닉네임을 입력해 주세요.</div>
-          )}
-          {errors.nickname && errors.nickname.type === 'maxLength' && (
-            <div className="text-red-500	text-sm">최대 6자만 입력할 수 있습니다.</div>
-          )}
-          {errorMsg == '이미 사용중인 닉네임입니다.' && (
-            <div className="text-red-500	text-sm">이미 사용중인 닉네임입니다.</div>
-          )}
+          {errors.nickname && errors.nickname.type === 'required' && <div className="text-red-500	text-sm">닉네임을 입력해 주세요.</div>}
+          {errors.nickname && errors.nickname.type === 'maxLength' && <div className="text-red-500	text-sm">최대 6자만 입력할 수 있습니다.</div>}
+          {errorMsg == '이미 사용중인 닉네임입니다.' && <div className="text-red-500	text-sm">이미 사용중인 닉네임입니다.</div>}
         </div>
         <div className="mt-6">
           <button className="min-h-[46px] rounded-[10px] w-full bg-neutral-300/70">

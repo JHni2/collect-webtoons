@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext'
 import { UserModalContext } from '../context/UserModalContext'
@@ -25,7 +25,7 @@ export default function UserMdal(): JSX.Element {
   return (
     <>
       {isOpen && (
-        <div className="user_modal absolute top-[55px] right-[10px] w-[110px] p-2 text-center bg-white shadow-md border rounded-lg border-neutral-300">
+        <div className="user_modal absolute top-[43px] right-[0px] w-[110px] p-2 text-center bg-white shadow-md border rounded-lg border-neutral-300 z-10">
           <div className="user_content">
             <div className="text_area">
               <p className="font-bold mb-4 text-neutral-800">

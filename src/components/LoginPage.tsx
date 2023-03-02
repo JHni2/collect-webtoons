@@ -3,13 +3,13 @@ import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
+import { UserInfoContext } from '../context/UserInfoContext'
 import { auth, db } from '../firebase'
 
 export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
   const [checked, setChecked] = useState(false)
-  const { user, setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserInfoContext)
 
   const sessionStorage = window.sessionStorage
 
@@ -91,9 +91,7 @@ export default function LoginPage(): JSX.Element {
               })}
             ></input>
           </div>
-          {errors.email && errors.email.type === 'required' && (
-            <div className="text-red-500	text-sm">이메일을 입력해 주세요.</div>
-          )}
+          {errors.email && errors.email.type === 'required' && <div className="text-red-500	text-sm">이메일을 입력해 주세요.</div>}
         </div>
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
@@ -107,21 +105,11 @@ export default function LoginPage(): JSX.Element {
               required: '필수 정보입니다',
             })}
           ></input>
-          {errors.pw && errors.pw.type === 'required' && (
-            <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>
-          )}
-          {errorMsg && (
-            <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>
-          )}
+          {errors.pw && errors.pw.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
+          {errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
         </div>
         <div className="keep_check relative pl-6 leading-4">
-          <input
-            value={checked ? 'on' : 'off'}
-            id="keep"
-            className="input_keep appearance-none"
-            type="checkbox"
-            onChange={() => setChecked(!checked)}
-          ></input>
+          <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none" type="checkbox" onChange={() => setChecked(!checked)}></input>
           <label htmlFor="keep" className="keep_text cursor-pointer">
             로그인 상태 유지
           </label>
@@ -135,11 +123,7 @@ export default function LoginPage(): JSX.Element {
               <span className="font-semibold">회원가입</span>
             </button>
           </Link>
-          <button
-            className="min-h-[46px] rounded-[10px] w-full border border-neutral-300/70 bg-google bg-no-repeat bg-contain p-2.5  bg-origin-content	"
-            type="button"
-            onClick={handleGoogleLogin}
-          >
+          <button className="min-h-[46px] rounded-[10px] w-full border border-neutral-300/70 bg-google bg-no-repeat bg-contain p-2.5  bg-origin-content	" type="button" onClick={handleGoogleLogin}>
             <span className="font-semibold ">구글 로그인</span>
           </button>
           <div className="mt-6 flex justify-center">

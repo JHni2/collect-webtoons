@@ -20,17 +20,17 @@ const defaultState = {
   setUser: (user: User) => {},
 } as UserContextInterface
 
-export const UserContext = createContext<UserContextInterface>(defaultState)
+export const UserInfoContext = createContext<UserContextInterface>(defaultState)
 
-type UserProvideProps = {
+type UserInfoProvideProps = {
   children: ReactNode
 }
 
-export default function UserProvider({ children }: UserProvideProps) {
+export default function UserProvider({ children }: UserInfoProvideProps) {
   const [user, setUser] = useState<User>({
     nickname: '',
     email: '',
     wishList: '',
   })
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
+  return <UserInfoContext.Provider value={{ user, setUser }}>{children}</UserInfoContext.Provider>
 }

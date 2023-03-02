@@ -8,7 +8,7 @@ import Login from './pages/Login'
 import Index from './pages/Index'
 import UserInfoProvider from './context/UserInfoContext'
 import User from './pages/User'
-import Search from './components/Search'
+import Search from './pages/Search'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             <Route path="/:id" element={<User />} />
             <Route path="/join" element={<Join />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/serach/:id" element={<Search />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
         </section>
       </UserInfoProvider>

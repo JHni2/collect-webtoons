@@ -46,7 +46,7 @@ export default function JoinPage(): JSX.Element {
   return (
     <div id="content">
       <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px]">
-        <div className="mb-5">
+        <div className="mb-5 whitespace-nowrap">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>
           </h3>
@@ -65,7 +65,7 @@ export default function JoinPage(): JSX.Element {
           {errors.email && errors.email.type === 'pattern' && <div className="text-red-500	text-sm">이메일 형식이 올바르지 않습니다.</div>}
           {errorMsg == '이미 사용중인 이메일입니다.' && <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>}
         </div>
-        <div className="mb-5">
+        <div className="mb-5 whitespace-nowrap">
           <h3 className="font-semibold mb-2">
             <label htmlFor="pw">비밀번호</label>
           </h3>
@@ -97,7 +97,7 @@ export default function JoinPage(): JSX.Element {
           {errors.pw_check && errors.pw_check.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
           {errors.pw_check && errors.pw_check.type === 'validate' && <div className="text-red-500	text-sm">비밀번호가 다릅니다.</div>}
         </div>
-        <div className="mb-5">
+        <div className="mb-5 whitespace-nowrap">
           <h3 className="font-semibold mb-2">
             <label htmlFor="nickname">닉네임</label>
           </h3>

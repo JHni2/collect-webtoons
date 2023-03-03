@@ -76,7 +76,7 @@ export default function LoginPage(): JSX.Element {
 
   return (
     <div id="content">
-      <form onSubmit={handleSubmit(onSubmit)} className="sm:w-[60vw] md:w-[460px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px]">
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>
@@ -108,7 +108,7 @@ export default function LoginPage(): JSX.Element {
           {errors.pw && errors.pw.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
           {errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
         </div>
-        <div className="keep_check relative pl-6 leading-4">
+        <div className="keep_check relative pl-6 leading-4 whitespace-nowrap">
           <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none cursor-pointer" type="checkbox" onChange={() => setChecked(!checked)}></input>
           <label htmlFor="keep" className="keep_text cursor-pointer">
             로그인 상태 유지
@@ -124,7 +124,7 @@ export default function LoginPage(): JSX.Element {
             </button>
           </Link>
           <button className="min-h-[46px] rounded-[10px] w-full border border-neutral-300/70 bg-google bg-no-repeat bg-contain p-2.5  bg-origin-content	" type="button" onClick={handleGoogleLogin}>
-            <span className="font-semibold ">구글 로그인</span>
+            <span className="font-semibold whitespace-nowrap">구글 로그인</span>
           </button>
           <div className="mt-6 flex justify-center">
             <Link to="/" className="min-h-[46px]">

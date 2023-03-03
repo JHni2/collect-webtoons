@@ -4,6 +4,7 @@ export type User = {
   nickname: string
   email: string
   wishList: string
+  profileImg: string
 }
 
 export interface UserContextInterface {
@@ -16,6 +17,7 @@ const defaultState = {
     nickname: '',
     email: '',
     wishList: '',
+    profileImg: '',
   },
   setUser: (user: User) => {},
 } as UserContextInterface
@@ -31,6 +33,7 @@ export default function UserProvider({ children }: UserInfoProvideProps) {
     nickname: '',
     email: '',
     wishList: '',
+    profileImg: '',
   })
   return <UserInfoContext.Provider value={{ user, setUser }}>{children}</UserInfoContext.Provider>
 }

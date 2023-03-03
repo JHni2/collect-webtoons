@@ -1,7 +1,7 @@
 .drawer {
-  overflow:hidden;
-  //overflow-x:hidden; 
-  //overflow-y:auto
+  //overflow:hidden;
+  overflow-x:hidden; 
+  overflow-y:auto
 }
 
 #container {
@@ -60,4 +60,10 @@ input[value='off']::before{
 
 input[value='on']::before{
   background-image: url('./imgs/check-circle-fill.svg');
+}
+
+.message_container::before{
+  content: "";
+  border: 7px solid transparent;
+  border-right: 1em solid rgb(229, 231, 235);
 }

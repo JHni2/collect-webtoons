@@ -80,8 +80,9 @@ export default function Header(): JSX.Element {
             </div>
           </div>
           {user.email.length > 0 ? (
-            <div ref={modalRef} className="p-1">
-              <div className="cursor-pointer hover:text-black" onClick={() => setIsOpen(!isOpen)}>
+            <div ref={modalRef} className="flex gap-3 items-center p-1">
+              <img className="w-[30px] h-[30px] rounded-[15px] hidden sm:block" src={`${user.profileImg}`} />
+              <div className="cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setIsOpen(!isOpen)}>
                 {user.nickname} ▾
               </div>
               <UserModal />

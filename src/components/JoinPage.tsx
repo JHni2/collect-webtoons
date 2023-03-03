@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
-import { useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth, db } from '../firebase'
@@ -31,6 +31,8 @@ export default function JoinPage(): JSX.Element {
         addDoc(collection(db, 'user'), {
           email: data.email,
           nickname: data.nickname,
+          wishList: '',
+          profileImg: profileImg,
         })
       })
       .catch((e) => {
@@ -43,9 +45,49 @@ export default function JoinPage(): JSX.Element {
   const pwRef = useRef()
   pwRef.current = watch('pw')
 
+  const defaultImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+  const [profileImg, setProfileImg] = useState<string | ArrayBuffer | null>(defaultImg)
+  const imgRef = useRef<HTMLInputElement>(null)
+
+  const handleClick = () => {
+    imgRef?.current?.click()
+  }
+
+  const handleChangeProfileImg = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+
+      reader.onload = () => {
+        setProfileImg(reader.result)
+      }
+    }
+  }
+
+  const handleDeletePreviewFile = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (imgRef.current) {
+      // imgRef.current.value = ''
+      setProfileImg(defaultImg)
+    }
+  }
+
   return (
     <div id="content">
       <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px]">
+        <div className="mb-5 whitespace-nowrap relative ">
+          <div className="profile_img w-[200px] h-[200px] m-auto">
+            <input ref={imgRef} type="file" accept="image/*" onChange={handleChangeProfileImg} className="hidden" />
+            {profileImg && <img src={profileImg.toString()} className="pre-img absolute object-cover w-[200px] h-[200px] rounded-[100px] cursor-pointer" onClick={handleClick} />}
+          </div>
+          {profileImg !== defaultImg && (
+            <button className="message_container absolute flex items-center text-sm bottom-0 right-0" onClick={handleDeletePreviewFile}>
+              <p className="text-xs bg-[#e5e7eb] h-10 p-[0.25rem_0.75rem] leading-8 rounded-lg">기본 이미지로 변경</p>
+            </button>
+          )}
+        </div>
+
         <div className="mb-5 whitespace-nowrap">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>

@@ -23,6 +23,10 @@ export default function Header(): JSX.Element {
 
   const activeEnter = (e: any) => {
     if (e.key === 'Enter') {
+      if (search === '') {
+        alert('검색어를 입력해 주세요.')
+        return
+      }
       goLink(search)
     }
   }
@@ -40,28 +44,32 @@ export default function Header(): JSX.Element {
   }, [isOpen])
 
   return (
-    <div id="header_wrap" className="h-[63px] w-full flex items-center  border-b-[1px] p-3 fixed">
-      <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative">
+    <div id="header_wrap" className="h-[63px] w-full flex items-center border-b-[1px] p-3 fixed ">
+      <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
-          <Link to="/" className="text-xl">
+          <Link to="/" className="text-xl whitespace-nowrap">
             웹툰 모아봐요
           </Link>
         </h2>
-        <div className="flex items-center gap-6 text-[#444]">
-          <div id="search">
-            <div className="search_box flex relative text-[#111]">
+        <div className="flex items-center gap-2 text-[#444] sm:gap-6">
+          <div id="search" className="relative">
+            <div className="search_box flex  text-[#111]">
               <input
                 type="text"
                 placeholder="제목 / 작가로 검색할 수 있습니다."
-                className="text-sm font-thin w-[268px] p-2 border-[1px] rounded-lg focus:outline-none"
+                className="text-sm font-thin w-[268px] p-2 border-[1px] rounded-lg focus:outline-none hidden sm:block"
                 onChange={handleSearchChange}
                 onKeyDown={(e) => activeEnter(e)}
               ></input>
               <button
                 type="button"
-                className="search_btn w-[38px] h-[38px] absolute right-0"
+                className="search_btn w-[38px] h-[38px] sm:absolute right-0"
                 onClick={(e) => {
                   e.preventDefault()
+                  if (search === '') {
+                    alert('검색어를 입력해 주세요.')
+                    return
+                  }
                   goLink(search)
                 }}
               >
@@ -80,7 +88,7 @@ export default function Header(): JSX.Element {
             </div>
           ) : (
             <div className="mr-2">
-              <Link to="login" className="cursor-pointer">
+              <Link to="login" className="cursor-pointer whitespace-nowrap">
                 로그인
               </Link>
             </div>

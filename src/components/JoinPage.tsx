@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from '@firebase/auth'
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth, db } from '../firebase'
@@ -38,6 +38,7 @@ export default function JoinPage(): JSX.Element {
       .catch((e) => {
         if (e.code == 'auth/email-already-in-use') {
           setErrorMsg('이미 사용중인 이메일입니다.')
+          return
         }
       })
   }
@@ -45,11 +46,17 @@ export default function JoinPage(): JSX.Element {
   const pwRef = useRef()
   pwRef.current = watch('pw')
 
+  const emailRef = useRef()
+  emailRef.current = watch('email')
+
+  const nicknameRef = useRef()
+  nicknameRef.current = watch('nickname')
+
   const defaultImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
   const [profileImg, setProfileImg] = useState<string | ArrayBuffer | null>(defaultImg)
   const imgRef = useRef<HTMLInputElement>(null)
 
-  const handleClick = () => {
+  const handleProfileImgClick = () => {
     imgRef?.current?.click()
   }
 
@@ -68,10 +75,13 @@ export default function JoinPage(): JSX.Element {
   const handleDeletePreviewFile = (e: React.MouseEvent) => {
     e.preventDefault()
     if (imgRef.current) {
-      // imgRef.current.value = ''
       setProfileImg(defaultImg)
     }
   }
+
+  useEffect(() => {
+    setErrorMsg('')
+  }, [emailRef.current, nicknameRef.current])
 
   return (
     <div id="content">
@@ -79,7 +89,7 @@ export default function JoinPage(): JSX.Element {
         <div className="mb-5 whitespace-nowrap relative ">
           <div className="profile_img w-[200px] h-[200px] m-auto">
             <input ref={imgRef} type="file" accept="image/*" onChange={handleChangeProfileImg} className="hidden" />
-            {profileImg && <img src={profileImg.toString()} className="pre-img absolute object-cover w-[200px] h-[200px] rounded-[100px] cursor-pointer" onClick={handleClick} />}
+            {profileImg && <img src={profileImg.toString()} className="pre-img absolute object-cover w-[200px] h-[200px] rounded-[100px] cursor-pointer" onClick={handleProfileImgClick} />}
           </div>
           {profileImg !== defaultImg && (
             <button className="message_container absolute flex items-center text-sm bottom-0 right-0" onClick={handleDeletePreviewFile}>
@@ -105,7 +115,7 @@ export default function JoinPage(): JSX.Element {
           </div>
           {errors.email && errors.email.type === 'required' && <div className="text-red-500	text-sm">이메일을 입력해 주세요.</div>}
           {errors.email && errors.email.type === 'pattern' && <div className="text-red-500	text-sm">이메일 형식이 올바르지 않습니다.</div>}
-          {errorMsg == '이미 사용중인 이메일입니다.' && <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>}
+          {!errors.email && errorMsg == '이미 사용중인 이메일입니다.' && <div className="text-red-500	text-sm">이미 사용중인 이메일입니다.</div>}
         </div>
         <div className="mb-5 whitespace-nowrap">
           <h3 className="font-semibold mb-2">
@@ -156,7 +166,7 @@ export default function JoinPage(): JSX.Element {
           </div>
           {errors.nickname && errors.nickname.type === 'required' && <div className="text-red-500	text-sm">닉네임을 입력해 주세요.</div>}
           {errors.nickname && errors.nickname.type === 'maxLength' && <div className="text-red-500	text-sm">최대 6자만 입력할 수 있습니다.</div>}
-          {errorMsg == '이미 사용중인 닉네임입니다.' && <div className="text-red-500	text-sm">이미 사용중인 닉네임입니다.</div>}
+          {!errors.nickname && errorMsg == '이미 사용중인 닉네임입니다.' && <div className="text-red-500	text-sm">이미 사용중인 닉네임입니다.</div>}
         </div>
         <div className="mt-6">
           <button className="min-h-[46px] rounded-[10px] w-full bg-neutral-300/70">

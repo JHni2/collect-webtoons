@@ -44,10 +44,10 @@ export default function Header(): JSX.Element {
   }, [isOpen])
 
   return (
-    <div id="header_wrap" className="h-[63px] w-full flex items-center border-b-[1px] p-3 fixed ">
+    <div id="header_wrap" className="h-[63px] w-full flex items-center border-b-[1px] p-[0.75rem_1rem] fixed ">
       <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
-          <Link to="/" className="text-xl whitespace-nowrap">
+          <Link to="/" className="text-lg whitespace-nowrap">
             웹툰 모아봐요
           </Link>
         </h2>
@@ -56,6 +56,7 @@ export default function Header(): JSX.Element {
             <div className="search_box flex  text-[#111]">
               <input
                 type="text"
+                value={search}
                 placeholder="제목 / 작가로 검색할 수 있습니다."
                 className="text-sm font-thin w-[268px] p-2 border-[1px] rounded-lg focus:outline-none hidden sm:block"
                 onChange={handleSearchChange}
@@ -82,14 +83,14 @@ export default function Header(): JSX.Element {
           {user.email.length > 0 ? (
             <div ref={modalRef} className="flex gap-3 items-center p-1">
               <img className="w-[30px] h-[30px] rounded-[15px] hidden sm:block" src={`${user.profileImg}`} />
-              <div className="cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setIsOpen(!isOpen)}>
+              <div className="text-sm cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setIsOpen(!isOpen)}>
                 {user.nickname} ▾
               </div>
               <UserModal />
             </div>
           ) : (
             <div className="mr-2">
-              <Link to="login" className="cursor-pointer whitespace-nowrap">
+              <Link to="login" className="text-sm cursor-pointer whitespace-nowrap">
                 로그인
               </Link>
             </div>

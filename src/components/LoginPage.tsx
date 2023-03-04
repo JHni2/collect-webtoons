@@ -35,6 +35,7 @@ export default function LoginPage(): JSX.Element {
           email: data.email,
           nickname: '',
           wishList: '',
+          profileImg: '',
         })
         navigate('/')
       })
@@ -47,6 +48,7 @@ export default function LoginPage(): JSX.Element {
   }
 
   const handleGoogleLogin = () => {
+    const defaultImg = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
       .then(async (data) => {
@@ -57,6 +59,7 @@ export default function LoginPage(): JSX.Element {
             email: data.user.email,
             nickname: data.user.displayName,
             wishList: '',
+            profileImg: data.user.photoURL != null ? data.user.photoURL : defaultImg,
           })
         }
         data.user.email &&
@@ -65,9 +68,11 @@ export default function LoginPage(): JSX.Element {
             email: data.user.email,
             nickname: data.user.displayName,
             wishList: '',
+            profileImg: data.user.photoURL != null ? data.user.photoURL : defaultImg,
           })
         data.user.email && sessionStorage.setItem('loggedInfo', data.user.email)
         navigate('/')
+        console.log(data)
       })
       .catch((err) => {
         console.log(err)

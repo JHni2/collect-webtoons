@@ -9,23 +9,26 @@ import Index from './pages/Index'
 import UserInfoProvider from './context/UserInfoContext'
 import User from './pages/User'
 import Search from './pages/Search'
+import ModalProvider from './context/UserModalContext'
 
 function App() {
   return (
     <BrowserRouter>
       <UserInfoProvider>
-        <ScrollToTop />
-        <section className="drawer-content">
-          {/* <Nav/> */}
-          <Routes>
-            {/* <Route path='*' element={<Error/>}/> */}
-            <Route path="/" element={<Index />} />
-            <Route path="/:id" element={<User />} />
-            <Route path="/join" element={<Join />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/search" element={<Search />} />
-          </Routes>
-        </section>
+        <ModalProvider>
+          <ScrollToTop />
+          <section className="drawer-content">
+            {/* <Nav/> */}
+            <Routes>
+              {/* <Route path='*' element={<Error/>}/> */}
+              <Route path="/" element={<Index />} />
+              <Route path="/:id" element={<User />} />
+              <Route path="/join" element={<Join />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/search" element={<Search />} />
+            </Routes>
+          </section>
+        </ModalProvider>
       </UserInfoProvider>
     </BrowserRouter>
   )

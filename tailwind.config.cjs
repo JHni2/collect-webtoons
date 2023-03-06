@@ -12,6 +12,9 @@ module.exports = {
       backgroundImage: {
         google: "url('./imgs/google.svg')",
       },
+      transitionProperty: {
+        toggleTransition: 'transform, oapcity',
+      },
     },
   },
   plugins: [],

@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import Loading from './Loading'
 import { db } from '../firebase'
 import { IWebtoon } from '../stores/Webtoon/types'
+import SearchedWebtoonList from './SearchedWebtoonList'
 
 export default function Search() {
   const location = useLocation()
@@ -16,7 +17,7 @@ export default function Search() {
     const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
-      if (doc.data()?.searchKeyword?.indexOf(searchQuery.keyword) != -1) {
+      if (doc.data()?.searchKeyword?.toLocaleLowerCase().indexOf(searchQuery.keyword?.toLocaleString()) != -1) {
         test.push(doc.data())
       }
     })
@@ -27,9 +28,24 @@ export default function Search() {
     filtered_webtoons()
   }, [searchQuery.keyword])
 
-  console.log('searchQuery.keyword', searchQuery.keyword)
-  console.log('test', test)
-  console.log('searchedWebtoons', searchedWebtoons)
-
-  return <>{searchedWebtoons == null && <Loading />}</>
+  return (
+    <>
+      {searchedWebtoons == null ? (
+        <Loading />
+      ) : searchedWebtoons.length === 0 ? (
+        <p className="p-[100px_0] text-center text-lg leading-[30px] font-semibold tracking-tight">
+          검색 결과가 없습니다.
+          <br />
+          새로운 작품을 탐색해 보세요!
+        </p>
+      ) : (
+        <ul className="search_result_list flex flex-col mt-4 gap-y-5">
+          {searchedWebtoons.map((webtoon) => {
+            const data: IWebtoon = webtoon
+            return <SearchedWebtoonList key={data.webtoonId} data={data} keyword={searchQuery.keyword} />
+          })}
+        </ul>
+      )}
+    </>
+  )
 }

@@ -7,7 +7,7 @@ export default function Join(): JSX.Element {
     <>
       <Loading />
       <Header />
-      <section id="container">
+      <section className="relative top-[60px]" id="container">
         <SearchPage />
       </section>
     </>

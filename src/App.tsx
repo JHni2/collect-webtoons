@@ -10,24 +10,30 @@ import UserInfoProvider from './context/UserInfoContext'
 import User from './pages/User'
 import Search from './pages/Search'
 import ModalProvider from './context/UserModalContext'
+import Header from './components/Header'
+import ToggleProvider from './context/SearchToggleContext'
 
 function App() {
   return (
     <BrowserRouter>
       <UserInfoProvider>
         <ModalProvider>
-          <ScrollToTop />
-          <section className="drawer-content">
-            {/* <Nav/> */}
-            <Routes>
-              {/* <Route path='*' element={<Error/>}/> */}
-              <Route path="/" element={<Index />} />
-              <Route path="/:id" element={<User />} />
-              <Route path="/join" element={<Join />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/search" element={<Search />} />
-            </Routes>
-          </section>
+          <ToggleProvider>
+            <ScrollToTop />
+            <section className="drawer-content">
+              <Header />
+              <section className="main pt-[60px]">
+                <Routes>
+                  {/* <Route path='*' element={<Error/>}/> */}
+                  <Route path="/" element={<Index />} />
+                  <Route path="/:id" element={<User />} />
+                  <Route path="/join" element={<Join />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/search" element={<Search />} />
+                </Routes>
+              </section>
+            </section>
+          </ToggleProvider>
         </ModalProvider>
       </UserInfoProvider>
     </BrowserRouter>

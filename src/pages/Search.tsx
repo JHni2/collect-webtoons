@@ -1,13 +1,11 @@
-import Header from '../components/Header'
 import Loading from '../components/Loading'
 import SearchPage from '../components/SearchPage'
 
-export default function Join(): JSX.Element {
+export default function Search(): JSX.Element {
   return (
     <>
       <Loading />
-      <Header />
-      <section className="relative top-[100px] sm:top-[60px]" id="container">
+      <section className="relative" id="container">
         <SearchPage />
       </section>
     </>

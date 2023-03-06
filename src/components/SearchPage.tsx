@@ -1,16 +1,19 @@
 import { collection, DocumentData, getDocs, query } from 'firebase/firestore'
 import QueryString from 'qs'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Loading from './Loading'
 import { db } from '../firebase'
 import { IWebtoon } from '../stores/Webtoon/types'
 import SearchedWebtoonList from './SearchedWebtoonList'
+import { SearchToggleContext } from '../context/SearchToggleContext'
 
 export default function Search() {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const [searchedWebtoons, setSearchedWebtoons] = useState<IWebtoon[] | null>(null)
+  const { isOpen: toggleIsOpen } = useContext(SearchToggleContext)
+  const $section = useRef<HTMLUListElement>(null)
   const test: any = []
 
   const filtered_webtoons = async () => {
@@ -23,6 +26,11 @@ export default function Search() {
     })
     setSearchedWebtoons(test)
   }
+
+  useEffect(() => {
+    toggleIsOpen && $section?.current?.classList.add('mt-[57px]')
+    !toggleIsOpen && $section?.current?.classList.remove('mt-[57px]')
+  }, [toggleIsOpen])
 
   useEffect(() => {
     filtered_webtoons()
@@ -39,7 +47,7 @@ export default function Search() {
           새로운 작품을 탐색해 보세요!
         </p>
       ) : (
-        <ul className="search_result_list flex flex-col mt-4 gap-y-5">
+        <ul ref={$section} className="search_result_list flex flex-col mt-4 gap-y-5">
           {searchedWebtoons.map((webtoon) => {
             const data: IWebtoon = webtoon
             return <SearchedWebtoonList key={data.webtoonId} data={data} keyword={searchQuery.keyword} />

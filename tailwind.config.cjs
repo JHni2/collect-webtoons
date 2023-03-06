@@ -13,7 +13,7 @@ module.exports = {
         google: "url('./imgs/google.svg')",
       },
       transitionProperty: {
-        toggleTransition: 'transform, oapcity',
+        toggleTransition: 'transform, opacity',
       },
     },
   },

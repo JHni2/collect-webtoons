@@ -1,5 +1,6 @@
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { SearchToggleContext } from '../context/SearchToggleContext'
 import { UserInfoContext } from '../context/UserInfoContext'
 import { UserModalContext } from '../context/UserModalContext'
 import UserModal from './UserModal'
@@ -7,10 +8,10 @@ import UserModal from './UserModal'
 export default function Header(): JSX.Element {
   const navigate = useNavigate()
   const { user } = useContext(UserInfoContext)
-  const { isOpen, setIsOpen } = useContext(UserModalContext)
+  const { isOpen: modalIsOpen, setIsOpen: setModalIsOpen } = useContext(UserModalContext)
+  const { isOpen: toggleIsOpen, setIsOpen: setToggleIsOpen } = useContext(SearchToggleContext)
   const [search, setSearch] = useState('')
   const $search = useRef<HTMLInputElement>(null)
-
   const modalRef = useRef<HTMLDivElement>(null)
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,15 +35,15 @@ export default function Header(): JSX.Element {
 
   useEffect(() => {
     const clickOutside = (e: any) => {
-      if (isOpen && !modalRef.current?.contains(e.target)) {
-        setIsOpen(false)
+      if (modalIsOpen && !modalRef.current?.contains(e.target)) {
+        setModalIsOpen(false)
       }
     }
     document.addEventListener('mousedown', clickOutside)
     return () => {
       document.removeEventListener('mousedown', clickOutside)
     }
-  }, [isOpen])
+  }, [modalIsOpen])
 
   const toogleSearch = () => {
     $search?.current?.classList.toggle('-z-10')
@@ -52,7 +53,7 @@ export default function Header(): JSX.Element {
   }
 
   return (
-    <div id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
+    <section id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
       <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
           <Link to="/" className="text-lg whitespace-nowrap">
@@ -71,7 +72,14 @@ export default function Header(): JSX.Element {
                 onChange={handleSearchChange}
                 onKeyDown={(e) => activeEnter(e)}
               ></input>
-              <button type="button" className="search_toggle w-[38px] h-[38px] sm:hidden" onClick={toogleSearch}>
+              <button
+                type="button"
+                className="search_toggle w-[38px] h-[38px] sm:hidden"
+                onClick={() => {
+                  toogleSearch()
+                  setToggleIsOpen(!toggleIsOpen)
+                }}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="bi bi-search m-[0_auto]" viewBox="0 0 16 16" fill="#777">
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
@@ -97,7 +105,7 @@ export default function Header(): JSX.Element {
           {user.email.length > 0 ? (
             <div ref={modalRef} className="flex gap-3 items-center p-1">
               <img className="w-[30px] h-[30px] rounded-[15px] hidden sm:block" src={`${user.profileImg}`} />
-              <div className="text-sm cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setIsOpen(!isOpen)}>
+              <div className="text-sm cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setModalIsOpen(!modalIsOpen)}>
                 {user.nickname} ▾
               </div>
               <UserModal />
@@ -111,6 +119,6 @@ export default function Header(): JSX.Element {
           )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

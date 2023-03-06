@@ -40,7 +40,6 @@ export default function SearchedWebtoonList({ data, keyword }: Item) {
       </Link>
       <div className="overflow-hidden">
         <Link to={data.url}>
-          {/* <div className="item_title font-semibold mb-1 whitespace-nowrap">{data.title}</div> */}
           <div className="item_title font-semibold mb-1 whitespace-nowrap">{highlightedText(title, keyword)}</div>
         </Link>
         <div className="item_author text-sm mb-[2px]">{highlightedText(author, keyword)}</div>

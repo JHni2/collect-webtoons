@@ -5,7 +5,7 @@ export default function Index(): JSX.Element {
   return (
     <>
       <Loading />
-      <section id="container">
+      <section id="container" className="m-[0_15px]">
         <IndexPage />
       </section>
     </>

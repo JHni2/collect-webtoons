@@ -45,7 +45,7 @@ export default function Header(): JSX.Element {
     }
   }, [modalIsOpen])
 
-  const toogleSearch = () => {
+  const toggleSearch = () => {
     $search?.current?.classList.toggle('-z-10')
     $search?.current?.classList.toggle('translate-y-full')
     $search?.current?.classList.toggle('!opacity-100')
@@ -56,9 +56,9 @@ export default function Header(): JSX.Element {
     <section id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
       <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
-          <Link to="/" className="text-lg whitespace-nowrap">
+          <div className="text-lg whitespace-nowrap cursor-pointer" onClick={() => window.location.replace('/')}>
             웹툰 모아봐요
-          </Link>
+          </div>
         </h2>
         <div className="flex items-center gap-2 text-[#444] sm:gap-6">
           <div id="search" className="relative">
@@ -76,7 +76,7 @@ export default function Header(): JSX.Element {
                 type="button"
                 className="search_toggle w-[38px] h-[38px] sm:hidden"
                 onClick={() => {
-                  toogleSearch()
+                  toggleSearch()
                   setToggleIsOpen(!toggleIsOpen)
                 }}
               >

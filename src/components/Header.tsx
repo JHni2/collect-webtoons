@@ -68,7 +68,7 @@ export default function Header(): JSX.Element {
                 type="text"
                 value={search}
                 placeholder="제목 / 작가로 검색할 수 있습니다."
-                className="fixed w-full left-0 top-[19px] border-t-0 -z-10 p-[10px_16px] text-sm font-thin border-[1px] opacity-0 transition-toggleTransition focus:outline-none sm:block sm:opacity-100 sm:w-[268px] sm:rounded-lg sm:z-0 sm:static sm:border-[1px] sm:translate-y-0 sm:transition-none"
+                className="search_input fixed w-full left-0 top-[19px] border-t-0 -z-10 p-[10px_16px] text-sm font-thin border-[1px] bg-[#e5e7eb] opacity-0 transition-toggleTransition focus:outline-none sm:block sm:opacity-100 sm:w-[268px] sm:rounded-lg sm:z-0 sm:static sm:border-[1px] sm:translate-y-0 sm:transition-none"
                 onChange={handleSearchChange}
                 onKeyDown={(e) => activeEnter(e)}
               ></input>

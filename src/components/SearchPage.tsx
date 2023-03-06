@@ -47,7 +47,7 @@ export default function Search() {
           새로운 작품을 탐색해 보세요!
         </p>
       ) : (
-        <ul ref={$section} className="search_result_list flex flex-col mt-4 gap-y-5">
+        <ul ref={$section} className="search_result_list flex flex-col gap-y-5">
           {searchedWebtoons.map((webtoon) => {
             const data: IWebtoon = webtoon
             return <SearchedWebtoonList key={data.webtoonId} data={data} keyword={searchQuery.keyword} />

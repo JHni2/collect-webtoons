@@ -64,6 +64,10 @@ input[value='on']::before{
   background-image: url('./imgs/check-circle-fill.svg');
 }
 
+.search_input {
+  -webkit-text-fill-color: #111111;
+}
+
 .message_container::before{
   content: "";
   border: 7px solid transparent;
@@ -84,4 +88,10 @@ input[value='on']::before{
 .poster_thumbnail:hover img {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+}
+
+@media (min-width: 480px) {
+  .search_result_list {
+    margin-top: 1rem;
+  }
 }

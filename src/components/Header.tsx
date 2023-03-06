@@ -52,7 +52,7 @@ export default function Header(): JSX.Element {
   }
 
   return (
-    <div id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed ">
+    <div id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
       <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
           <Link to="/" className="text-lg whitespace-nowrap">

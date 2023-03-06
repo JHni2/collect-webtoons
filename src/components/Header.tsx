@@ -49,6 +49,7 @@ export default function Header(): JSX.Element {
     $search?.current?.classList.toggle('translate-y-full')
     $search?.current?.classList.toggle('!opacity-100')
     $search?.current?.blur()
+    $search?.current?.scrollIntoView()
   }
 
   return (

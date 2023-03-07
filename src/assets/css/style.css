@@ -64,7 +64,7 @@ input[value='on']::before{
 }
 
 .search_input {
-  -webkit-text-fill-color: #111111;
+  -webkit-text-fill-color: currentcolor;
 }
 
 .message_container::before{
@@ -93,4 +93,10 @@ input[value='on']::before{
   .search_result_list {
     margin-top: 1rem;
   }
+}
+
+.html, body {
+  -webkit-overflow-scrolling: touch !important;
+  overflow: auto !important;
+  height: 100% !important;
 }

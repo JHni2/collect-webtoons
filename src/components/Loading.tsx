@@ -29,7 +29,7 @@ export default function Loading() {
   return (
     <>
       {loading ? (
-        <div className="loaing_wrap absolute w-full h-full overflow-hidden bg-white z-10">
+        <div className="loaing_wrap absolute w-full h-full overflow-hidden bg-white z-20">
           <div
             style={{
               position: 'fixed',

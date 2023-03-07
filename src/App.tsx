@@ -12,6 +12,7 @@ import Search from './pages/Search'
 import ModalProvider from './context/UserModalContext'
 import Header from './components/Header'
 import ToggleProvider from './context/SearchToggleContext'
+import Loading from './components/Loading'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <ToggleProvider>
             <ScrollToTop />
             <section className="drawer-content">
+              <Loading />
               <Header />
               <section className="main pt-[60px] max-w-[980px] m-[0_auto]">
                 <Routes>

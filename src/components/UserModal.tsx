@@ -33,9 +33,9 @@ export default function UserMdal(): JSX.Element {
                 <span className="font-medium">님</span>
               </p>
               <div className="text-sm">
-                <Link to={`/${user.nickname}`}>
+                <div className="cursor-pointer" onClick={() => window.location.replace(`/${user.nickname}`)}>
                   <span className="text-neutral-800">마이 페이지</span>
-                </Link>
+                </div>
                 <div className="divider border-t m-[10px_0]"></div>
                 <div className="cursor-pointer text-xs text-neutral-600" onClick={handleLogOut}>
                   로그아웃

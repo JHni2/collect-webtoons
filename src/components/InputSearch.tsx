@@ -70,7 +70,7 @@ export default function InputSearch(): JSX.Element {
         )}
         <button
           type="button"
-          className="search_toggle w-[30px] h-[30px] border border-[#e5e7eb] rounded-full sm:hidden"
+          className="search_toggle w-[30px] h-[30px] border border-[#e0e2e9] rounded-full sm:hidden"
           onClick={() => {
             toggleSearch()
             setToggleIsOpen(!toggleIsOpen)

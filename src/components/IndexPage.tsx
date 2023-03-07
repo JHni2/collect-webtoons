@@ -11,7 +11,7 @@ export default function IndexPage(): JSX.Element {
     <div id="content" className="!mt-4 w-full">
       <div className="relative flex gap-4 whitespace-nowrap w-full text-[15px] sm:text-base">
         <div>
-          <div className="absolute w-[300px] sm:w-[580px] left-0 flex justify-between gap-4">
+          <div className="absolute flex justify-between gap-4 w-full sm:w-[580px] left-0 font-semibold">
             <span className="hidden sm:block cursor-pointer">요일전체</span>
             {days.map((day, index) => {
               return (

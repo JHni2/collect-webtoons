@@ -758,18 +758,6 @@ export const WebtoonData: IWebtoon[] = [
     day: 1,
   },
   {
-    webtoonId: 1781,
-    title: '바니와 오빠들',
-    author: '니은',
-    des: "외모 따지지 않는 '개념녀'?아니, 나 완전 '얼빠'야!신입생 시절, 남자의 외모를 따지지 않는 개념녀라고 떠들었던 주인공 바니! 그러나 첫 남자친구에게 '쉬운 여자'로 낙인되며신입생 바니의 첫 연애는 쓰게 막을 내린다.그리고 드디어 인정한 바니 자신의 ‘얼빠 속성’!‘잘생긴 남자가 좋다’는 사실을 외쳐댄 지 얼마 후, 웬일인지 잘생긴 남자들이 자꾸만 꼬인다?  연애에 있어서는 자존감이 낮은 평범한 21살, 그런 바니에게 호감을 표현하는 5명의 미남자!누구나 흑역사일 수밖에 없는 20대 초반의 연애, 바니는 자신을 진심으로 사랑해주는 좋은 사람과 행복한 연애를 꾸릴 수 있을까?",
-    url: 'https://webtoon.kakao.com/content/%EB%B0%94%EB%8B%88%EC%99%80-%EC%98%A4%EB%B9%A0%EB%93%A4/1781',
-    img: 'https://kr-a.kakaopagecdn.com/P/C/1781/c1a/2x/3b5f323c-d1cc-4c8c-b063-5afde753018e_f~os.w.png',
-    service: 'kakao',
-    searchKeyword: '바니와오빠들니은',
-    genre: '로맨스',
-    day: 1,
-  },
-  {
     webtoonId: 2589,
     title: '대사형 선유',
     author: '노경찬, 박창환',

@@ -13,7 +13,7 @@ export default function Search() {
   const [searchedWebtoons, setSearchedWebtoons] = useState<IWebtoon[] | null>(null)
   const test: any = []
 
-  const filtered_webtoons = async () => {
+  const filteredWebtoons = async () => {
     const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
@@ -25,7 +25,7 @@ export default function Search() {
   }
 
   useEffect(() => {
-    filtered_webtoons()
+    filteredWebtoons()
   }, [searchQuery.keyword])
 
   return (

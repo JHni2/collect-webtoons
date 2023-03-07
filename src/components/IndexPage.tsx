@@ -1,13 +1,7 @@
-import { useContext } from 'react'
-
-import { UserInfoContext } from '../context/UserInfoContext'
-
-export default function IndexPage() {
-  const { user } = useContext(UserInfoContext)
-
+export default function IndexPage(): JSX.Element {
   return (
-    <div className="relative top-20" id="content">
-      <div></div>
+    <div id="content" className="!mt-4">
+      <div>안ㄴ여하세요</div>
     </div>
   )
 }

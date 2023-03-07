@@ -1,9 +1,9 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useContext, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { SearchToggleContext } from '../context/SearchToggleContext'
 import { WebtoonData } from '../stores/Webtoon/WebtoonData'
 
-export default function InputSearch() {
+export default function InputSearch(): JSX.Element {
   const navigate = useNavigate()
   const { isOpen: toggleIsOpen, setIsOpen: setToggleIsOpen } = useContext(SearchToggleContext)
   const [searchModalIsOpen, setSearchModalIsOpen] = useState(false)

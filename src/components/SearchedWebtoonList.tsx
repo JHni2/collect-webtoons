@@ -7,7 +7,7 @@ type Item = {
   keyword: any
 }
 
-export default function SearchedWebtoonList({ data, keyword }: Item) {
+export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Element {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth)
   const title = data.title.toLocaleLowerCase()
   const author = data.author.toLocaleLowerCase()

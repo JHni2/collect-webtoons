@@ -15,7 +15,7 @@ export default function Search(): JSX.Element {
   return (
     <>
       <Loading />
-      <section ref={$section} className="relative m-[0_15px] transition-all" id="container">
+      <section ref={$section} className="relative transition-all" id="container">
         <SearchPage />
       </section>
     </>

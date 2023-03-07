@@ -7,7 +7,7 @@ import { db } from '../firebase'
 import { IWebtoon } from '../stores/Webtoon/types'
 import SearchedWebtoonList from './SearchedWebtoonList'
 
-export default function Search() {
+export default function Search(): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const [searchedWebtoons, setSearchedWebtoons] = useState<IWebtoon[] | null>(null)

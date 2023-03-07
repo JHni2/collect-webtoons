@@ -1,6 +1,5 @@
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { SearchToggleContext } from '../context/SearchToggleContext'
+import { useContext, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext'
 import { UserModalContext } from '../context/UserModalContext'
 import InputSearch from './InputSearch'
@@ -26,7 +25,7 @@ export default function Header() {
 
   return (
     <section id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
-      <div id="header" className="flex justify-between items-center w-[980px] m-[0_auto] relative gap-2">
+      <div id="header" className="flex justify-between items-center w-[1025px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
           <div className="text-lg whitespace-nowrap cursor-pointer" onClick={() => window.location.replace('/')}>
             웹툰 모아봐요

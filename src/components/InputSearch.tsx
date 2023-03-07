@@ -40,7 +40,7 @@ export default function InputSearch(): JSX.Element {
 
   return (
     <div id="search" className="relative">
-      <div className="search_box flex text-[#111]">
+      <div className="search_box flex items-center text-[#111]">
         <input
           ref={$search}
           type="text"
@@ -70,13 +70,13 @@ export default function InputSearch(): JSX.Element {
         )}
         <button
           type="button"
-          className="search_toggle w-[38px] h-[38px] sm:hidden"
+          className="search_toggle w-[30px] h-[30px] border border-[#3333] rounded-full sm:hidden"
           onClick={() => {
             toggleSearch()
             setToggleIsOpen(!toggleIsOpen)
           }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="bi bi-search m-[0_auto]" viewBox="0 0 16 16" fill="#777">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" className="bi bi-search m-[0_auto]" viewBox="0 0 16 16" fill="#777">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
           </svg>
         </button>

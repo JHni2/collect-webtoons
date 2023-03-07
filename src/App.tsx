@@ -24,7 +24,7 @@ function App() {
             <section className="drawer-content">
               <Loading />
               <Header />
-              <section className="main p-[60px_16px_0] w-full">
+              <section className="main flex p-[60px_16px_0] w-full">
                 <Routes>
                   {/* <Route path='*' element={<Error/>}/> */}
                   <Route path="/" element={<Index />} />

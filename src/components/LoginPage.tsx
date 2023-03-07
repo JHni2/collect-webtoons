@@ -81,7 +81,7 @@ export default function LoginPage(): JSX.Element {
 
   return (
     <div id="content">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px] p-4">
         <div className="mb-5">
           <h3 className="font-semibold mb-2">
             <label htmlFor="email">이메일</label>

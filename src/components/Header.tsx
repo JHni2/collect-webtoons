@@ -31,14 +31,12 @@ export default function Header() {
             웹툰 모아봐요
           </div>
         </h2>
-        <div className="flex items-center gap-2 text-[#444] sm:gap-6">
+        <div className="flex items-center gap-3 text-[#444] sm:gap-6">
           <InputSearch />
           {user.email.length > 0 ? (
-            <div ref={modalRef} className="flex gap-3 items-center p-1">
-              <img className="w-[30px] h-[30px] rounded-[15px] hidden sm:block" src={`${user.profileImg}`} />
-              <div className="text-sm cursor-pointer hover:text-black whitespace-nowrap" onClick={() => setModalIsOpen(!modalIsOpen)}>
-                {user.nickname} ▾
-              </div>
+            <div ref={modalRef} className="flex gap-3 items-center p-1 cursor-pointer" onClick={() => setModalIsOpen(!modalIsOpen)}>
+              <img className="w-[30px] h-[30px] rounded-[15px]" src={`${user.profileImg}`} />
+              <div className="text-sm hover:text-black whitespace-nowrap">{user.nickname} ▾</div>
               <UserModal />
             </div>
           ) : (

@@ -1,6 +1,5 @@
 import { signOut } from 'firebase/auth'
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext'
 import { UserModalContext } from '../context/UserModalContext'
 import { auth } from '../firebase'

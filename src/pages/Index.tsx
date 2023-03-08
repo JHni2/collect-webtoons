@@ -7,13 +7,13 @@ export default function Index(): JSX.Element {
   const $section = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    toggleIsOpen && $section?.current?.classList.add('pt-[41px]')
-    !toggleIsOpen && $section?.current?.classList.remove('pt-[41px]')
+    toggleIsOpen && $section?.current?.classList.add('!pt-[57px]')
+    !toggleIsOpen && $section?.current?.classList.remove('!pt-[57px]')
   }, [toggleIsOpen])
 
   return (
     <>
-      <section ref={$section} id="container" className="w-full !px-4 lg:!px-0 transition-all">
+      <section ref={$section} id="container" className="w-full px-4 lg:px-0 transition-all">
         <IndexPage />
       </section>
     </>

@@ -8,8 +8,8 @@ export default function Search(): JSX.Element {
   const $section = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    toggleIsOpen && $section?.current?.classList.add('pt-[41px]')
-    !toggleIsOpen && $section?.current?.classList.remove('pt-[41px]')
+    toggleIsOpen && $section?.current?.classList.add('!pt-[41px]')
+    !toggleIsOpen && $section?.current?.classList.remove('!pt-[41px]')
   }, [toggleIsOpen])
 
   return (

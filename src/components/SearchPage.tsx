@@ -2,7 +2,6 @@ import { collection, DocumentData, getDocs, query } from 'firebase/firestore'
 import QueryString from 'qs'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import Loading from './Loading'
 import { db } from '../firebase'
 import { IWebtoon } from '../stores/Webtoon/types'
 import SearchedWebtoonList from './SearchedWebtoonList'
@@ -31,7 +30,7 @@ export default function Search(): JSX.Element {
   return (
     <>
       {searchedWebtoons == null ? (
-        <Loading />
+        <div></div>
       ) : searchedWebtoons.length === 0 ? (
         <p className="p-[100px_0] text-center text-lg leading-[30px] font-semibold tracking-tight">
           검색 결과가 없습니다.

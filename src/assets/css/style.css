@@ -59,11 +59,11 @@ input[value='off']::before{
 }
 
 input[value='off']::before{
-  background-image: url('./imgs/check-circle.svg');
+  background-image: url('img/check-circle.svg');
 }
 
 input[value='on']::before{
-  background-image: url('./imgs/check-circle-fill.svg');
+  background-image: url('img/check-circle-fill.svg');
 }
 
 .search_input {

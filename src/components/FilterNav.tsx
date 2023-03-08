@@ -55,12 +55,12 @@ export default function FilterNav() {
         </ul>
         {weekIsOpen && (
           <ul className="flex justify-between gap-4 w-full sm:w-[428px] md:w-[490px] ">
-            <li className={searchQuery.week === 'all' ? 'p-[3px_9px] bg-[#f5f5f5] rounded-full cursor-pointer hidden sm:block' : 'p-[3px_9px] hidden sm:block cursor-pointer'} onClick={() => navigate(`/?week=all`)}>
+            <li className={searchQuery.week === 'all' ? 'p-[3px_9px] bg-[#e6e6e6] rounded-full cursor-pointer hidden sm:block' : 'p-[3px_9px] hidden sm:block cursor-pointer'} onClick={() => navigate(`/?week=all`)}>
               요일전체
             </li>
             {weeks.map((week, index) => {
               return (
-                <li onClick={() => navigate(`/?week=${Week[week]}`)} key={index} className={searchQuery.week == undefined ? (week === today ? 'p-[3px_9px] bg-[#f5f5f5] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer') : searchQuery.week === Week[week] ? 'p-[3px_9px] bg-[#f5f5f5] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer'}>
+                <li onClick={() => navigate(`/?week=${Week[week]}`)} key={index} className={searchQuery.week == undefined ? (week === today ? 'p-[3px_9px] bg-[#e6e6e6] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer') : searchQuery.week === Week[week] ? 'p-[3px_9px] bg-[#e6e6e6] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer'}>
                   {week}
                 </li>
               )
@@ -71,7 +71,7 @@ export default function FilterNav() {
           <ul className="flex flex-wrap gap-x-4 gap-y-3 text-[15px]">
             {genres.map((genre, index) => {
               return (
-                <li onClick={() => navigate(`/?genre=${genre}`)} key={index} className={Object.values(searchQuery)[0] === genre ? 'text-[#000000] bg-[#e5e7eb] p-[3px_9px] rounded-lg cursor-pointer' : 'text-[#696969] bg-[#f5f5f5] p-[3px_9px] rounded-lg cursor-pointer'}>
+                <li onClick={() => navigate(`/?genre=${genre}`)} key={index} className={Object.values(searchQuery)[0] === genre ? 'text-[#000000] bg-[#e5e7eb] p-[3px_9px] rounded-lg cursor-pointer' : 'text-[#696969] bg-[#e6e6e6] p-[3px_9px] rounded-lg cursor-pointer'}>
                   #{genre}
                 </li>
               )
@@ -82,7 +82,7 @@ export default function FilterNav() {
           <ul className="flex flex-wrap gap-x-4 gap-y-3 w-full text-[15px]">
             {services.map((service, index) => {
               return (
-                <li onClick={() => navigate(`/?service=${service}`)} key={index} className={Object.values(searchQuery)[0] === service ? 'text-[#000000] bg-[#e5e7eb] p-[3px_9px] rounded-lg cursor-pointer' : 'text-[#696969] bg-[#f5f5f5] p-[3px_9px] rounded-lg cursor-pointer'}>
+                <li onClick={() => navigate(`/?service=${service}`)} key={index} className={Object.values(searchQuery)[0] === service ? 'text-[#000000] bg-[#e5e7eb] p-[3px_9px] rounded-lg cursor-pointer' : 'text-[#696969] bg-[#e6e6e6] p-[3px_9px] rounded-lg cursor-pointer'}>
                   {service}
                 </li>
               )

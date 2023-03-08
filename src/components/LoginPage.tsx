@@ -10,9 +10,7 @@ export default function LoginPage(): JSX.Element {
   const [errorMsg, setErrorMsg] = useState('')
   const [checked, setChecked] = useState(false)
   const { setUser } = useContext(UserInfoContext)
-
   const sessionStorage = window.sessionStorage
-
   const navigate = useNavigate()
 
   const {
@@ -38,9 +36,9 @@ export default function LoginPage(): JSX.Element {
           profileImg: '',
         })
         navigate('/')
+        window.location.replace('/')
       })
       .catch((e) => {
-        console.log(e.code)
         if (e.code == 'auth/wrong-password' || e.code == 'auth/user-not-found') {
           setErrorMsg('이메일 또는 비밀번호를 잘못 입력했습니다.')
         }
@@ -72,7 +70,6 @@ export default function LoginPage(): JSX.Element {
           })
         data.user.email && sessionStorage.setItem('loggedInfo', data.user.email)
         navigate('/')
-        console.log(data)
       })
       .catch((err) => {
         console.log(err)

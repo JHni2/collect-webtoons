@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef } from 'react'
-import Loading from '../components/Loading'
 import SearchPage from '../components/SearchPage'
 import { SearchToggleContext } from '../context/SearchToggleContext'
 
@@ -14,7 +13,6 @@ export default function Search(): JSX.Element {
 
   return (
     <>
-      <Loading />
       <section ref={$section} className="relative transition-all" id="container">
         <SearchPage />
       </section>

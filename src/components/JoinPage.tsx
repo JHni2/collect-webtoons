@@ -84,7 +84,7 @@ export default function JoinPage(): JSX.Element {
   }, [emailRef.current, nicknameRef.current])
 
   return (
-    <div id="content">
+    <div id="content" className="m-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="w-[90vw] sm:w-[460px] p-4">
         <div className="mb-5 whitespace-nowrap relative ">
           <div className="profile_img w-[200px] h-[200px] m-auto">

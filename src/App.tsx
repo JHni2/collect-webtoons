@@ -13,6 +13,7 @@ import ModalProvider from './context/UserModalContext'
 import Header from './components/Header'
 import ToggleProvider from './context/SearchToggleContext'
 import Loading from './components/Loading'
+import Weekday from './pages/Weekday'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <section className="drawer-content">
               <Loading />
               <Header />
-              <section className="main flex p-[60px_16px_0] w-full">
+              <section className="main flex w-full">
                 <Routes>
                   {/* <Route path='*' element={<Error/>}/> */}
                   <Route path="/" element={<Index />} />
@@ -32,6 +33,7 @@ function App() {
                   <Route path="/join" element={<Join />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/search" element={<Search />} />
+                  <Route path="/weekday" element={<Weekday />} />
                 </Routes>
               </section>
             </section>

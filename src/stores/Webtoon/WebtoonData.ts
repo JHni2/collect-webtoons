@@ -1,4 +1,6 @@
 import { IWebtoon } from './types'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 
 export const WebtoonData: IWebtoon[] = [
   {
@@ -11,7 +13,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '뷰티풀군바리설이/윤성원',
     genre: '스토리 드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 783052,
@@ -23,7 +25,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '퀘스트지상주의박태준',
     genre: '스토리 드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 728750,
@@ -35,7 +37,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '장씨세가호위무사김인호조형근',
     genre: '스토리 무협 사극',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 795297,
@@ -47,7 +49,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '신화급귀속아이템을손에넣었다정선율헤스',
     genre: '스토리 판타지',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 602910,
@@ -59,7 +61,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '윈드브레이커조용석',
     genre: '스토리 스포츠',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 774863,
@@ -71,7 +73,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '팔이피플매미희세',
     genre: '스토리 드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 183559,
@@ -83,7 +85,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '신의탑SIU',
     genre: '스토리 판타지',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 654774,
@@ -95,7 +97,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '소녀의세계모랑지',
     genre: '스토리 드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 739115,
@@ -107,7 +109,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '앵무살수김성진',
     genre: '스토리 판타지',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 783053,
@@ -119,7 +121,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '김부장박태준만화회사정종택',
     genre: '스토리 액션',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 790713,
@@ -131,7 +133,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '대학원탈출일지요다',
     genre: '에피소드 일상',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 784248,
@@ -143,7 +145,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '내가키운S급들seri비완근서',
     genre: '스토리 판타지',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 703846,
@@ -155,7 +157,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '여신강림야옹이',
     genre: '스토리 로맨스',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 730656,
@@ -167,7 +169,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '사신소년류',
     genre: '스토리 액션',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 796152,
@@ -179,7 +181,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '마루는강쥐모죠',
     genre: '에피소드 개그',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 743139,
@@ -191,7 +193,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '한림체육관혜성이석재',
     genre: '에피소드 액션',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 789979,
@@ -203,7 +205,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '멸망이후의세계S-Cynan언데드감자싱숑',
     genre: '스토리 판타지',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 804783,
@@ -215,7 +217,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '사변괴담강태진',
     genre: '옴니버스 스릴러',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 747269,
@@ -227,7 +229,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '전지적독자시점UMI슬리피-C싱숑',
     genre: '스토리 판타지',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 804862,
@@ -239,7 +241,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '백XX박태준만화회사병장펀치킥',
     genre: '스토리 액션',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 775141,
@@ -251,7 +253,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '66666년만에환생한흑마법사팀더지크파사화봉',
     genre: '스토리 판타지',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 717481,
@@ -263,7 +265,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '일렉시드손제호제나',
     genre: '스토리 액션',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 784417,
@@ -275,7 +277,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '무림서부웨스트정한길컵라면',
     genre: '스토리 무협 사극',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 701535,
@@ -287,7 +289,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '격기3반이학',
     genre: '스토리 스포츠',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 738694,
@@ -299,7 +301,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '튜토리얼탑의고인물토프방구석김씨',
     genre: '스토리 액션',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 750184,
@@ -311,7 +313,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '나쁜사람둠스',
     genre: '에피소드 액션',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 800770,
@@ -323,7 +325,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '재벌집막내아들JP김병관산경',
     genre: '스토리 드라마',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 570503,
@@ -335,7 +337,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '연애혁명232',
     genre: '스토리 드라마',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 747271,
@@ -347,7 +349,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '나노마신현절무금강불괴한중월야',
     genre: '스토리 무협 사극',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 776255,
@@ -359,7 +361,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '천마육성광휘조형근',
     genre: 'genre',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 783888,
@@ -371,7 +373,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '현실퀘스트이주운태성',
     genre: '스토리 액션',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 780170,
@@ -383,7 +385,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '나혼자네크로맨서김경열김동준지점장',
     genre: '스토리 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 746857,
@@ -395,7 +397,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '무사만리행운배민기',
     genre: '스토리 무협 사극',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 796827,
@@ -407,7 +409,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '회귀한천재헌터의슬기로운청소생활고일고일달비트',
     genre: '스토리 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 795643,
@@ -419,7 +421,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '호랑신랑뎐고추참치',
     genre: '스토리 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 641253,
@@ -431,7 +433,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '외모지상주의박태준',
     genre: '스토리 드라마',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 773797,
@@ -443,7 +445,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '나혼자만렙뉴비WAN.Z스윙뱃메슬로우',
     genre: '스토리 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 790245,
@@ -455,7 +457,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '어쩌다보니천생연분꿀타래담초',
     genre: '스토리 로맨스',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 777767,
@@ -467,7 +469,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '역대급영지설계사이현민김현수문백경',
     genre: '스토리 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 753478,
@@ -479,7 +481,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '데드퀸김규삼',
     genre: '스토리 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 725586,
@@ -491,7 +493,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '1초시니광운',
     genre: '스토리 드라마',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 712362,
@@ -503,7 +505,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '개를낳았다이선',
     genre: '스토리 드라마',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 711422,
@@ -515,7 +517,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '삼국지톡무적핑크이리',
     genre: '에피소드 무협 사극',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 751168,
@@ -527,7 +529,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '상남자하늘소도가도김태궁',
     genre: '스토리 드라마',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 792651,
@@ -539,7 +541,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '99강화나무몽둥이홍실지페리',
     genre: '스토리 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 650305,
@@ -551,7 +553,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '호랑이형님이상규',
     genre: '스토리 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 727188,
@@ -563,7 +565,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '취사병전설이되다제이로빈이진수',
     genre: '스토리 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 597447,
@@ -575,7 +577,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '프리드로우전선욱',
     genre: '스토리 드라마',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 801589,
@@ -587,7 +589,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '놓지마정신줄시즌3신태훈나승훈',
     genre: '에피소드 개그',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 787500,
@@ -599,7 +601,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '은탄김규삼',
     genre: '스토리 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 721948,
@@ -611,7 +613,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '스터디그룹신형욱유승연',
     genre: '스토리 액션',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 793283,
@@ -623,7 +625,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '악몽의형상김용키',
     genre: '스토리 스릴러',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 805356,
@@ -635,7 +637,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '이종격투기꼬마비',
     genre: '스토리 드라마',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 736277,
@@ -647,7 +649,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '싸움독학박태준만화회사김정현스튜디오',
     genre: '스토리 액션',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 710751,
@@ -659,7 +661,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '약한영웅서패스김진석',
     genre: '에피소드 액션',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 758150,
@@ -671,7 +673,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '입학용병YC락현',
     genre: '스토리 액션',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 795262,
@@ -683,7 +685,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '사형소년박태준만화회사김숭늉광산',
     genre: '스토리 스릴러',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 779632,
@@ -695,7 +697,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '일타강사백사부팀더지크오리보리간짜장',
     genre: '스토리 무협 사극',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 703844,
@@ -707,7 +709,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '가비지타임2사장',
     genre: '스토리 스포츠',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 805156,
@@ -719,7 +721,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '고양이타타로로',
     genre: '스토리 드라마',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 785251,
@@ -731,7 +733,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '시월드가내게집착한다승우한윤설',
     genre: '스토리 로맨스',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 803909,
@@ -743,7 +745,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'naver',
     searchKeyword: '나혼자특성빨로무한성장샤이아탄2사랑선운(鮮雲)',
     genre: '스토리 액션',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 1781,
@@ -755,7 +757,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '바니와오빠들니은',
     genre: '로맨스',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 2589,
@@ -767,7 +769,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '대사형선유노경찬,박창환',
     genre: '액션 무협',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 2043,
@@ -779,7 +781,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '무지개다리파수꾼이서',
     genre: '판타지 드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 2473,
@@ -791,7 +793,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '이번생은가주가되겠습니다ANTSTUDIO몬ANTSTUDIO김로아',
     genre: '로맨스 판타지',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 818,
@@ -803,7 +805,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '미생윤태호',
     genre: '드라마',
-    day: 1,
+    day: 'mon',
   },
   {
     webtoonId: 1998,
@@ -815,7 +817,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '사랑하는존재향유크리에이티브',
     genre: '로맨스',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 2340,
@@ -827,7 +829,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '도굴왕윤쓰RediceStudio3B2S산지직송',
     genre: '학원 판타지',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 1369,
@@ -839,7 +841,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '지옥사원네온비캐러멜',
     genre: '판타지 드라마',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 3299,
@@ -851,7 +853,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '도망쳤더니결혼을하게됐습니다스튜디오늘봄토란은솔림',
     genre: '로맨스 판타지',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 2871,
@@ -863,7 +865,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '튜린의릴리엔나겸나유혜',
     genre: '로맨스 판타지',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 3266,
@@ -875,7 +877,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '벼락승진이모세',
     genre: '드라마',
-    day: 2,
+    day: 'tue',
   },
   {
     webtoonId: 1963,
@@ -887,7 +889,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '유부녀킬러YOON검둥',
     genre: '드라마',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 2362,
@@ -899,7 +901,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '북검전기해민우각',
     genre: '액션 무협',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 3211,
@@ -911,7 +913,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '무한의마법사kirazREDICESTUDIO테미스김치우',
     genre: '학원 판타지',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 3024,
@@ -923,7 +925,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '여보,나파업할게요송예슬고은채',
     genre: '로맨스 판타지',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 2074,
@@ -935,7 +937,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '수린당-비늘고치는집-일링스',
     genre: '판타지 드라마',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 3334,
@@ -947,7 +949,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '진짜딸이돌아왔다린아마루코믹스',
     genre: '로맨스 판타지',
-    day: 3,
+    day: 'wed',
   },
   {
     webtoonId: 1525,
@@ -959,7 +961,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '경이로운소문장이',
     genre: '판타지 드라마',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 1796,
@@ -971,7 +973,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '샬롯에게는다섯명의제자가있다용용',
     genre: '로맨스 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 2155,
@@ -983,7 +985,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '관존이강진노경찬송윤달',
     genre: '액션 무협',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 2472,
@@ -995,7 +997,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '아빠,나이결혼안할래요!유리Roal홍희수',
     genre: '로맨스 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 3224,
@@ -1007,7 +1009,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '버린쓰레기는다시줍지않는다티바버텍스배고픈밤',
     genre: '로맨스 판타지',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 2327,
@@ -1019,7 +1021,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '신마경천기곰국일황',
     genre: '액션 무협',
-    day: 4,
+    day: 'thu',
   },
   {
     webtoonId: 3014,
@@ -1031,7 +1033,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '무적자노경찬휘',
     genre: '액션 무협',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 2335,
@@ -1043,7 +1045,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '두번사는랭커농농사도연',
     genre: '학원 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 1405,
@@ -1055,7 +1057,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '바리공주김나임',
     genre: '판타지 드라마',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 2383,
@@ -1067,7 +1069,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '악역의엔딩은죽음뿐수월권겨을',
     genre: '로맨스 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 3322,
@@ -1079,7 +1081,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: 'VR히어로백민기',
     genre: '학원 판타지',
-    day: 5,
+    day: 'fri',
   },
   {
     webtoonId: 2141,
@@ -1091,7 +1093,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '백작가의불청객들아르누니',
     genre: '드라마',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 1497,
@@ -1103,7 +1105,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '주말도미시식회이용우',
     genre: '액션 무협',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 2315,
@@ -1115,7 +1117,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '화산전생토마씨정준',
     genre: '액션 무협',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 3261,
@@ -1127,7 +1129,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '세계관최강자들이내게집착한다ZION김코끼리',
     genre: '로맨스 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 3022,
@@ -1139,7 +1141,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '벼락맞을인간들곽인근',
     genre: '드라마',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 3324,
@@ -1151,7 +1153,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '복수를후원해주세요은산SAM정오찬',
     genre: '로맨스 판타지',
-    day: 6,
+    day: 'sat',
   },
   {
     webtoonId: 2511,
@@ -1163,7 +1165,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '가드패스오손도손',
     genre: '학원 판타지',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 1295,
@@ -1175,7 +1177,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '퀴퀴한일기2B',
     genre: '코믹 일상',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 2957,
@@ -1187,7 +1189,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '존재광진김경준',
     genre: '판타지 드라마',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 1575,
@@ -1199,7 +1201,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '슬프게도이게내인생슬',
     genre: '코믹 일상',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 2852,
@@ -1211,7 +1213,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '검술명가막내아들AZICOBYContentslabblue이제원황제펭권',
     genre: '액션 무협',
-    day: 0,
+    day: 'sun',
   },
   {
     webtoonId: 3340,
@@ -1223,7 +1225,7 @@ export const WebtoonData: IWebtoon[] = [
     service: 'kakao',
     searchKeyword: '소녀가주가되었습니다파도랄라단리한',
     genre: '로맨스 판타지',
-    day: 0,
+    day: 'sun',
   },
 ]
 
@@ -1238,6 +1240,25 @@ export const WebtoonData: IWebtoon[] = [
   service: 'naver',
   searchKeyword:'',
   genre:'',
-  day: 4
+  day: 'thu'
 },
 */
+
+// const addData = async (webtoon: IWebtoon) => {
+//   const docRef = await addDoc(collection(db, 'webtoon'), {
+//     webtoonId: webtoon.webtoonId,
+//     title: webtoon.title,
+//     author: webtoon.author,
+//     des: webtoon.des,
+//     url: webtoon.url,
+//     img: webtoon.img,
+//     service: webtoon.service,
+//     searchKeyword: webtoon.searchKeyword,
+//     genre: webtoon.genre,
+//     day: webtoon.day,
+//   })
+// }
+
+// WebtoonData.forEach((webtoon) => {
+//   addData(webtoon)
+// })

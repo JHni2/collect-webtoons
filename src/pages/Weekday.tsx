@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react'
-import Nav from '../components/Nav'
+import FilterNav from '../components/FilterNav'
 import WeekdayPage from '../components/WeekdayPage'
 import { SearchToggleContext } from '../context/SearchToggleContext'
 
@@ -14,8 +14,8 @@ export default function Weekday(): JSX.Element {
 
   return (
     <>
-      <section ref={$section} id="container" className="w-full transition-all">
-        <Nav />
+      <section ref={$section} id="container" className="w-full !px-4 lg:!px-0 transition-all">
+        <FilterNav />
         <WeekdayPage />
       </section>
     </>

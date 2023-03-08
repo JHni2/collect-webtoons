@@ -1,20 +1,22 @@
 import { useContext, useEffect, useRef } from 'react'
-import IndexPage from '../components/IndexPage'
+import FilterNav from '../components/FilterNav'
+import GenrePage from '../components/GenrePage'
 import { SearchToggleContext } from '../context/SearchToggleContext'
 
-export default function Index(): JSX.Element {
+export default function Genre(): JSX.Element {
   const { isOpen: toggleIsOpen } = useContext(SearchToggleContext)
   const $section = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    toggleIsOpen && $section?.current?.classList.add('pt-[41px]')
-    !toggleIsOpen && $section?.current?.classList.remove('pt-[41px]')
+    toggleIsOpen && $section?.current?.classList.add('!pt-[60px]')
+    !toggleIsOpen && $section?.current?.classList.remove('!pt-[60px]')
   }, [toggleIsOpen])
 
   return (
     <>
       <section ref={$section} id="container" className="w-full !px-4 lg:!px-0 transition-all">
-        <IndexPage />
+        <FilterNav />
+        <GenrePage />
       </section>
     </>
   )

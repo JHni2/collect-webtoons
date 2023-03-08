@@ -14,6 +14,7 @@ import Header from './components/Header'
 import ToggleProvider from './context/SearchToggleContext'
 import Loading from './components/Loading'
 import Weekday from './pages/Weekday'
+import Genre from './pages/Genre'
 
 function App() {
   return (
@@ -33,7 +34,6 @@ function App() {
                   <Route path="/join" element={<Join />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/search" element={<Search />} />
-                  <Route path="/weekday" element={<Weekday />} />
                 </Routes>
               </section>
             </section>

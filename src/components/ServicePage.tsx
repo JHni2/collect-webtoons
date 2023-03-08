@@ -4,14 +4,10 @@ import QueryString from 'qs'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
-import { Week } from '../constants/week'
 
-export default function WeekdayPage(): JSX.Element {
+export default function ServicePage(): JSX.Element {
   const location = useLocation()
-  const weekQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  const weeks = ['월', '화', '수', '목', '금', '토', '일']
-  const d = new Date()
-  const today = weeks[d.getDay() === 0 ? 6 : d.getDay() - 1]
+  const ServiceQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const [filteredWebtoons, setFilteredWebtoons] = useState<IWebtoon[] | null>(null)
   const test: any = []
 
@@ -19,9 +15,7 @@ export default function WeekdayPage(): JSX.Element {
     const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
-      if (weekQuery.week === 'all') {
-        test.push(doc.data())
-      } else if ((Object.keys(weekQuery).length === 0 && doc.data().day === Week[today]) || doc.data().day === weekQuery.week) {
+      if (doc.data().service === ServiceQuery.service) {
         test.push(doc.data())
       }
     })
@@ -30,7 +24,7 @@ export default function WeekdayPage(): JSX.Element {
 
   useEffect(() => {
     filteringWebtoons()
-  }, [weekQuery.week])
+  }, [ServiceQuery.service])
 
   return (
     <ul>

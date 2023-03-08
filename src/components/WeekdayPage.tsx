@@ -4,10 +4,14 @@ import QueryString from 'qs'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
+import { Week } from '../constants/week'
 
 export default function WeekdayPage(): JSX.Element {
   const location = useLocation()
-  const dayQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
+  const weekQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
+  const weeks = ['월', '화', '수', '목', '금', '토', '일']
+  const d = new Date()
+  const today = weeks[d.getDay() === 0 ? 6 : d.getDay() - 1]
   const [filteredWebtoons, setFilteredWebtoons] = useState<IWebtoon[] | null>(null)
   const test: any = []
 
@@ -15,7 +19,9 @@ export default function WeekdayPage(): JSX.Element {
     const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
-      if (doc.data().day === dayQuery.week) {
+      if (weekQuery.week === 'all') {
+        test.push(doc.data())
+      } else if ((Object.keys(weekQuery).length === 0 && doc.data().day === Week[today]) || doc.data().day === weekQuery.week) {
         test.push(doc.data())
       }
     })
@@ -24,13 +30,13 @@ export default function WeekdayPage(): JSX.Element {
 
   useEffect(() => {
     filteringWebtoons()
-  }, [dayQuery.week])
+  }, [weekQuery.week])
 
   return (
-    <ul className="px-3">
+    <ul className="px-3 lg:px-0">
       {filteredWebtoons?.map((webtoon) => {
         return (
-          <li key={webtoon.webtoonId} className="float-left w-2/6 pb-5">
+          <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5">
             <div className="ml-[5px]">
               <div className="thumbnail overflow-hidden">
                 <img className="rounded-md" src={webtoon.img} alt={webtoon.title} />
@@ -39,7 +45,7 @@ export default function WeekdayPage(): JSX.Element {
                 <div className="title text-sm truncate ">
                   <span>{webtoon.title}</span>
                 </div>
-                <span className="author text-xs text-[#888]">{webtoon.author}</span>
+                <span className="author text-xs text-[#888] truncate">{webtoon.author}</span>
               </div>
             </div>
           </li>

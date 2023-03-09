@@ -16,10 +16,10 @@ import ToggleProvider from './context/SearchToggleContext'
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <UserInfoProvider>
         <ModalProvider>
           <ToggleProvider>
-            <ScrollToTop />
             <section className="drawer-content">
               <Header />
               <section className="main flex w-full">

@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { doc, setDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -53,12 +53,13 @@ export default function LoginPage(): JSX.Element {
         const q = query(collection(db, 'user'), where('email', '==', data.user.email))
         const querySnapshot = await getDocs(q)
         if (querySnapshot.docs.length === 0) {
-          addDoc(collection(db, 'user'), {
-            email: data.user.email,
-            nickname: data.user.displayName,
-            wishList: '',
-            profileImg: data.user.photoURL != null ? data.user.photoURL : defaultImg,
-          })
+          data.user.displayName &&
+            setDoc(doc(db, 'user', data.user.displayName), {
+              email: data.user.email,
+              nickname: data.user.displayName,
+              wishList: '',
+              profileImg: data.user.photoURL != null ? data.user.photoURL : defaultImg,
+            })
         }
         data.user.email &&
           data.user.displayName &&

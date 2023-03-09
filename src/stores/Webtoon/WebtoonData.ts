@@ -1,5 +1,5 @@
 import { IWebtoon } from './types'
-import { collection, addDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 
 export const WebtoonData: IWebtoon[] = [
@@ -1244,21 +1244,21 @@ export const WebtoonData: IWebtoon[] = [
 },
 */
 
-// const addData = async (webtoon: IWebtoon) => {
-//   const docRef = await addDoc(collection(db, 'test'), {
-//     webtoonId: webtoon.webtoonId,
-//     title: webtoon.title,
-//     author: webtoon.author,
-//     des: webtoon.des,
-//     url: webtoon.url,
-//     img: webtoon.img,
-//     service: webtoon.service,
-//     searchKeyword: webtoon.searchKeyword,
-//     genre: webtoon.genre,
-//     day: webtoon.day,
-//   })
-// }
+const addData = async (webtoon: IWebtoon) => {
+  const docRef = await setDoc(doc(db, 'test', webtoon.title), {
+    webtoonId: webtoon.webtoonId,
+    title: webtoon.title,
+    author: webtoon.author,
+    des: webtoon.des,
+    url: webtoon.url,
+    img: webtoon.img,
+    service: webtoon.service,
+    searchKeyword: webtoon.searchKeyword,
+    genre: webtoon.genre,
+    day: webtoon.day,
+  })
+}
 
-// WebtoonData.forEach((webtoon) => {
-//   addData(webtoon)
-// })
+WebtoonData.forEach((webtoon) => {
+  // addData(webtoon)
+})

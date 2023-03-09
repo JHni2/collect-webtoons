@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
 
 type Item = {
@@ -43,9 +43,9 @@ export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Elemen
   }, [])
 
   return (
-    <li className="search_result_item flex gap-x-4 cursor-pointer" onClick={() => navigate(`/detail/?title=${data.webtoonId}`)}>
-      <div className="poster_thumbnail w-[60px] h-[78px] rounded-md overflow-hidden relative sm:w-[120px] sm:h-[156px]">
-        <img className="item_poster transition-all duration-300" src={data.img} alt={data.title} />
+    <li className="search_result_item flex gap-x-4 cursor-pointer mb-4" onClick={() => navigate(`/detail/?title=${data.webtoonId}`)}>
+      <div className="poster_thumbnail w-[60px] h-[78px] shrink-0 rounded-md overflow-hidden relative sm:w-[120px] sm:h-[156px]">
+        <img className="item_poster transition-all duration-300 " src={data.img} alt={data.title} />
       </div>
       <div className="overflow-hidden">
         <div className="item_title font-semibold mb-1 whitespace-nowrap">{highlightedText(title, keyword)}</div>

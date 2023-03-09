@@ -46,7 +46,7 @@ export default function GenrePage(): JSX.Element {
             <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5">
               <div className="ml-[5px] cursor-pointer" onClick={() => navigate(`?titleID=${webtoon.webtoonId}`)}>
                 <div className="thumbnail overflow-hidden">
-                  <img className="rounded-md" src={webtoon.img} alt={webtoon.title} />
+                  <img className="rounded-md aspect-[1/1.3]" src={webtoon.img} alt={webtoon.title} />
                 </div>
                 <div className="info flex flex-col gap-[.15rem] max-w-[125px] pt-1">
                   <div className="title text-sm truncate ">

@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from '@firebase/auth'
-import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
+import { collection, doc, getDocs, query, where, setDoc } from 'firebase/firestore'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -28,7 +28,7 @@ export default function JoinPage(): JSX.Element {
     await createUserWithEmailAndPassword(auth, data.email, data.pw)
       .then(() => {
         navigate('/login')
-        addDoc(collection(db, 'user'), {
+        setDoc(doc(db, 'user', data.nickname), {
           email: data.email,
           nickname: data.nickname,
           wishList: '',

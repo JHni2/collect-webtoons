@@ -3,7 +3,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 're
 export type User = {
   nickname: string
   email: string
-  wishList: string
+  wishList: number[]
   profileImg: string
 }
 
@@ -16,7 +16,7 @@ const defaultState = {
   user: {
     nickname: '',
     email: '',
-    wishList: '',
+    wishList: [],
     profileImg: '',
   },
   setUser: (user: User) => {},
@@ -32,7 +32,7 @@ export default function UserProvider({ children }: UserInfoProvideProps) {
   const [user, setUser] = useState<User>({
     nickname: '',
     email: '',
-    wishList: '',
+    wishList: [],
     profileImg: '',
   })
   return <UserInfoContext.Provider value={{ user, setUser }}>{children}</UserInfoContext.Provider>

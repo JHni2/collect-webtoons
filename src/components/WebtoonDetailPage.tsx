@@ -25,21 +25,30 @@ export default function WebtoonDetailPage(): JSX.Element {
     setFilteredWebtoon(test[0])
   }
 
-  const addToFavoriteHandler = async (webtoonId: number, webtoonTitle: string) => {
-    const favoriteRef = doc(db, 'test', webtoonTitle)
-    if (user.wishList.includes(webtoonTitle)) {
-      console.log('이미 있음')
-    } else {
-      console.log('등록')
-      await updateDoc(favoriteRef, {
-        wishList: webtoonTitle,
-      })
-    }
-  }
-
   useEffect(() => {
     filteringWebtoon()
   }, [])
+
+  const [favWebtoons, setFavWebtoons] = useState<number[]>([...user.wishList])
+
+  const addToFavoriteHandler = async (webtoonId: number) => {
+    const favoriteRef = doc(db, 'user', user.nickname)
+    console.log(user)
+
+    if (favWebtoons.indexOf(webtoonId) != -1) {
+      const idx = favWebtoons.indexOf(webtoonId)
+      favWebtoons.splice(idx, 1)
+      setFavWebtoons(favWebtoons)
+      await updateDoc(favoriteRef, {
+        wishList: favWebtoons,
+      })
+    } else {
+      setFavWebtoons([...favWebtoons, webtoonId])
+      await updateDoc(favoriteRef, {
+        wishList: [...favWebtoons, webtoonId],
+      })
+    }
+  }
 
   return (
     <div>
@@ -53,7 +62,7 @@ export default function WebtoonDetailPage(): JSX.Element {
             <img src={filteredWebtoon.img} alt={filteredWebtoon.title} />
           </div>
           <div>
-            <button onClick={() => addToFavoriteHandler(filteredWebtoon.webtoonId, filteredWebtoon.title)}>관심 웹툰</button>
+            <button onClick={() => addToFavoriteHandler(filteredWebtoon.webtoonId)}>관심 웹툰</button>
             <button>웹툰 바로 가기</button>
           </div>
           <div>

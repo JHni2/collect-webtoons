@@ -82,7 +82,7 @@ input[value='on']::before{
   border-right: 1em solid rgb(229, 231, 235);
 }
 
-.poster_thumbnail::after{
+.thumbnail::after{
   position: absolute;
   top: 0;
   left: 0;
@@ -93,7 +93,7 @@ input[value='on']::before{
   content: "";
 }
 
-.poster_thumbnail:hover img {
+.thumbnail:hover img {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }

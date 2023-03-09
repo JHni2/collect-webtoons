@@ -13,7 +13,7 @@ export default function Index(): JSX.Element {
 
   return (
     <>
-      <section ref={$section} id="container" className="w-full px-4 lg:px-0 transition-all">
+      <section ref={$section} id="container" className="w-full px-4 lg:px-0 transition-[transform]">
         <IndexPage />
       </section>
     </>

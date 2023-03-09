@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
 
 type Item = {
@@ -12,6 +12,7 @@ export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Elemen
   const title = data.title.toLocaleLowerCase()
   const author = data.author.toLocaleLowerCase()
   const url = innerWidth < 480 ? `${data.url.split('https://').join('https://m.')}` : data.url
+  const navigate = useNavigate()
 
   const highlightedText = (text: string, keyword: string) => {
     if (keyword !== '' && text.includes(keyword)) {
@@ -42,16 +43,12 @@ export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Elemen
   }, [])
 
   return (
-    <li className="search_result_item flex gap-x-4">
-      <Link to={url}>
-        <div className="poster_thumbnail w-[60px] h-[78px] rounded-md overflow-hidden relative sm:w-[120px] sm:h-[156px]">
-          <img className="item_poster transition-all duration-300" src={data.img} alt={data.title} />
-        </div>
-      </Link>
+    <li className="search_result_item flex gap-x-4 cursor-pointer" onClick={() => navigate(`/detail/?title=${data.webtoonId}`)}>
+      <div className="poster_thumbnail w-[60px] h-[78px] rounded-md overflow-hidden relative sm:w-[120px] sm:h-[156px]">
+        <img className="item_poster transition-all duration-300" src={data.img} alt={data.title} />
+      </div>
       <div className="overflow-hidden">
-        <Link to={url}>
-          <div className="item_title font-semibold mb-1 whitespace-nowrap">{highlightedText(title, keyword)}</div>
-        </Link>
+        <div className="item_title font-semibold mb-1 whitespace-nowrap">{highlightedText(title, keyword)}</div>
         <div className="item_author text-sm mb-[2px]">{highlightedText(author, keyword)}</div>
         <div className="item_des text-sm text-[#888] mb-[2px] truncate ">{data.des}</div>
       </div>

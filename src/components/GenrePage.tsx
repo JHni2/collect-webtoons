@@ -4,13 +4,18 @@ import QueryString from 'qs'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
-import Pagination from 'react-js-pagination'
+import Paging from './Pagination'
 
 export default function GenrePage(): JSX.Element {
   const location = useLocation()
   const genreQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const [filteredWebtoons, setFilteredWebtoons] = useState<IWebtoon[] | null>(null)
   const test: any = []
+  const [page, setPage] = useState(1)
+  const [showWebtoons, setShowWebtoons] = useState<IWebtoon[]>([])
+  const indexOfLastWebtoon = page * 9
+  const indexOfFirstWebtoon = indexOfLastWebtoon - 9
+  const count = filteredWebtoons ? filteredWebtoons.length : 0
 
   const filteringWebtoons = async () => {
     const q = query(collection(db, 'test'))
@@ -21,19 +26,21 @@ export default function GenrePage(): JSX.Element {
       }
     })
     setFilteredWebtoons(test)
+    setShowWebtoons(test.slice(indexOfFirstWebtoon, indexOfLastWebtoon))
   }
 
   useEffect(() => {
-    filteringWebtoons()
+    setPage(1)
   }, [genreQuery.genre])
 
-  const [page, setPage] = useState(1)
-  const count = filteredWebtoons?.length
+  useEffect(() => {
+    filteringWebtoons()
+  }, [genreQuery.genre, page, indexOfFirstWebtoon, indexOfLastWebtoon])
 
   return (
     <>
       <ul>
-        {filteredWebtoons?.map((webtoon) => {
+        {showWebtoons?.map((webtoon) => {
           return (
             <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5">
               <div className="ml-[5px]">
@@ -51,7 +58,7 @@ export default function GenrePage(): JSX.Element {
           )
         })}
       </ul>
-      {/* <Pagination page={page} count={count} setPage={setPage} /> */}
+      <div className="sm:hidden">{showWebtoons.length > 0 && <Paging page={page} count={count} setPage={setPage} />}</div>
     </>
   )
 }

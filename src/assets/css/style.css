@@ -1,3 +1,9 @@
+html, body {
+  -webkit-overflow-scrolling: touch !important;
+  overflow: auto !important;
+  height: 100% !important;
+}
+
 .drawer {
   overflow-x:hidden; 
   overflow-y:auto
@@ -16,7 +22,7 @@
   margin: 0 auto;
   padding-top: 1rem;
   box-sizing: border-box;
-  }
+}
 
 #content {
   display: flex;
@@ -98,8 +104,23 @@ input[value='on']::before{
   }
 }
 
-html, body {
-  -webkit-overflow-scrolling: touch !important;
-  overflow: auto !important;
-  height: 100% !important;
+.pagination {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 1rem 0 1.5rem 0;
+  }
+
+.pagination li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 30px;
+  text-decoration: none;
+  padding: .2rem .65rem;
+}
+
+.pagination .active{
+ background-color: #e5e7eb;
+ border-radius: 100px;
 }

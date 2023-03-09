@@ -32,7 +32,7 @@ export default function LoginPage(): JSX.Element {
         setUser({
           email: data.email,
           nickname: '',
-          wishList: '',
+          wishList: [],
           profileImg: '',
         })
         navigate('/')
@@ -66,7 +66,7 @@ export default function LoginPage(): JSX.Element {
           setUser({
             email: data.user.email,
             nickname: data.user.displayName,
-            wishList: '',
+            wishList: [],
             profileImg: data.user.photoURL != null ? data.user.photoURL : defaultImg,
           })
         data.user.email && sessionStorage.setItem('loggedInfo', data.user.email)

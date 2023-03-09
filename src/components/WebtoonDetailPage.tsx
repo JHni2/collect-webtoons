@@ -1,7 +1,7 @@
 import { query, collection, getDocs, DocumentData, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import QueryString from 'qs'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { IWebtoon } from '../stores/Webtoon/types'
 import { UserInfoContext } from '../context/UserInfoContext'
@@ -12,6 +12,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   const { user, setUser } = useContext(UserInfoContext)
   const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
   const test: any = []
+  const navigate = useNavigate()
 
   const filteringWebtoon = async () => {
     const q = query(collection(db, 'test'))
@@ -32,8 +33,11 @@ export default function WebtoonDetailPage(): JSX.Element {
   const [favWebtoons, setFavWebtoons] = useState<number[]>([...user.wishList])
 
   const addToFavoriteHandler = async (webtoonId: number) => {
+    if (user.nickname === '') {
+      navigate('/login')
+      return
+    }
     const favoriteRef = doc(db, 'user', user.nickname)
-    console.log(user)
 
     if (favWebtoons.indexOf(webtoonId) != -1) {
       const idx = favWebtoons.indexOf(webtoonId)
@@ -49,6 +53,8 @@ export default function WebtoonDetailPage(): JSX.Element {
       })
     }
   }
+
+  console.log()
 
   return (
     <div>

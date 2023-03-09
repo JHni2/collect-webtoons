@@ -1,5 +1,5 @@
 import QueryString from 'qs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Week } from '../constants/week'
 
@@ -17,6 +17,18 @@ export default function FilterNav() {
   const navigate = useNavigate()
   const activeCss = 'p-[3px_9px] bg-[#e5e7eb] rounded-lg cursor-pointer'
   const inactiveCss = 'p-[3px_9px] text-[#b9b9b9] cursor-pointer'
+  const activeFilter = Object.keys(searchQuery)[0]
+
+  useEffect(() => {
+    if (activeFilter === 'genre') {
+      setWeekIsOpen(false)
+      setGenreIsOpen(true)
+    }
+    if (activeFilter === 'service') {
+      setWeekIsOpen(false)
+      setServiceIsOpen(true)
+    }
+  }, [activeFilter])
 
   return (
     <div id="content" className="lg:p-0">

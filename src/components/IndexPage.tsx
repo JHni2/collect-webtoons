@@ -8,7 +8,7 @@ import WeekdayPage from './WeekdayPage'
 export default function IndexPage(): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  let activeFIlter = Object.keys(searchQuery)
+  const activeFIlter = Object.keys(searchQuery)
 
   return (
     <>

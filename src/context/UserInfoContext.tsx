@@ -1,9 +1,10 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react'
+import { IWebtoon } from '../stores/Webtoon/types'
 
 export type User = {
   nickname: string
   email: string
-  wishList: number[]
+  wishList: IWebtoon[]
   profileImg: string
 }
 

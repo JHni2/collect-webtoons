@@ -9,7 +9,7 @@ import { UserInfoContext } from '../context/UserInfoContext'
 export default function WebtoonDetailPage(): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  const { user, setUser } = useContext(UserInfoContext)
+  const { user } = useContext(UserInfoContext)
   const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
   const test: any = []
   const navigate = useNavigate()
@@ -30,31 +30,38 @@ export default function WebtoonDetailPage(): JSX.Element {
     filteringWebtoon()
   }, [])
 
-  const [favWebtoons, setFavWebtoons] = useState<number[]>([...user.wishList])
+  const [favWebtoons, setFavWebtoons] = useState<IWebtoon[]>([...user.wishList])
 
-  const addToFavoriteHandler = async (webtoonId: number) => {
+  const addToFavoriteHandler = async (webtoon: IWebtoon) => {
+    const favoriteRef = doc(db, 'user', user.nickname)
+
     if (user.nickname === '') {
       navigate('/login')
       return
     }
-    const favoriteRef = doc(db, 'user', user.nickname)
 
-    if (favWebtoons.indexOf(webtoonId) != -1) {
-      const idx = favWebtoons.indexOf(webtoonId)
-      favWebtoons.splice(idx, 1)
-      setFavWebtoons(favWebtoons)
+    if (favWebtoons.length === 0) {
+      setFavWebtoons([...favWebtoons, webtoon])
       await updateDoc(favoriteRef, {
-        wishList: favWebtoons,
-      })
-    } else {
-      setFavWebtoons([...favWebtoons, webtoonId])
-      await updateDoc(favoriteRef, {
-        wishList: [...favWebtoons, webtoonId],
+        wishList: [...favWebtoons, webtoon],
       })
     }
-  }
 
-  console.log()
+    favWebtoons.forEach(async (favWebtoon, idx) => {
+      if (favWebtoon.webtoonId === webtoon.webtoonId) {
+        favWebtoons.splice(idx, 1)
+        setFavWebtoons(favWebtoons)
+        await updateDoc(favoriteRef, {
+          wishList: favWebtoons,
+        })
+      } else {
+        setFavWebtoons([...favWebtoons, webtoon])
+        await updateDoc(favoriteRef, {
+          wishList: [...favWebtoons, webtoon],
+        })
+      }
+    })
+  }
 
   return (
     <div>
@@ -68,7 +75,7 @@ export default function WebtoonDetailPage(): JSX.Element {
             <img src={filteredWebtoon.img} alt={filteredWebtoon.title} />
           </div>
           <div>
-            <button onClick={() => addToFavoriteHandler(filteredWebtoon.webtoonId)}>관심 웹툰</button>
+            <button onClick={() => addToFavoriteHandler(filteredWebtoon)}>관심 웹툰</button>
             <button>웹툰 바로 가기</button>
           </div>
           <div>

@@ -72,7 +72,7 @@ export default function FilterNav() {
             </li>
             {weeks.map((week, index) => {
               return (
-                <li onClick={() => navigate(`/?week=${Week[week]}`)} key={index} className={searchQuery.week == undefined ? (week === today ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer') : searchQuery.week === Week[week] ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer'}>
+                <li onClick={() => navigate(`/?week=${Week[week]}`)} key={index} className={searchQuery.week == undefined ? (week === today ? 'p-[3px_9px] bg-[#ffe46d80] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer') : searchQuery.week === Week[week] ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer'}>
                   {week}
                 </li>
               )

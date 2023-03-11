@@ -12,6 +12,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   const { user } = useContext(UserInfoContext)
   const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
   const [heart, setheart] = useState(false)
+  const [height, setHeight] = useState<number | undefined>(undefined)
   const test: any = []
   const navigate = useNavigate()
 
@@ -25,7 +26,6 @@ export default function WebtoonDetailPage(): JSX.Element {
       }
     })
     setFilteredWebtoon(test[0])
-    // console.log(user.wishList.some(webtoon=>{}))
   }
 
   useEffect(() => {
@@ -69,6 +69,9 @@ export default function WebtoonDetailPage(): JSX.Element {
   }
 
   useEffect(() => {
+    if (document.getElementById('des') !== null) {
+      setHeight(document.getElementById('des')?.clientHeight)
+    }
     user.wishList.forEach((webtoon) => {
       if (webtoon.title === filteredWebtoon?.title) setheart(true)
     })
@@ -78,6 +81,8 @@ export default function WebtoonDetailPage(): JSX.Element {
   const handleMoreBtn = () => {
     setMore(!more)
   }
+
+  console.log(height)
 
   return (
     <div>
@@ -93,11 +98,11 @@ export default function WebtoonDetailPage(): JSX.Element {
           <div className="flex justify-between mb-5">
             <button className="flex items-center gap-2" onClick={() => addToFavoriteHandler(filteredWebtoon)}>
               {heart ? (
-                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffcca8 " className="bi bi-heart-fill" viewBox="0 0 16 16">
+                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffbfa3 " className="bi bi-heart-fill" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                 </svg>
               ) : (
-                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffcca8 " className="bi bi-heart" viewBox="0 0 16 16">
+                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffbfa3 " className="bi bi-heart" viewBox="0 0 16 16">
                   <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                 </svg>
               )}
@@ -117,11 +122,19 @@ export default function WebtoonDetailPage(): JSX.Element {
                 )
               })}
             </div>
-            <p className={more ? '' : 'close'}>{filteredWebtoon.des}</p>
-            <div className="flex justify-end mt-2">
-              <span onClick={handleMoreBtn} className="cursor-pointer text-sm text-[#a08472]">
-                {more ? '접기' : '더보기'}
-              </span>
+            <div>
+              <p id="des" className={more ? '' : 'close'}>
+                {filteredWebtoon.des}
+              </p>
+              {height && height >= 72 ? (
+                <div className="flex justify-end mt-2">
+                  <span onClick={handleMoreBtn} className="cursor-pointer text-sm text-[#a08472]">
+                    {more ? '접기' : '더보기'}
+                  </span>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function UserPage(): JSX.Element {
   const findFavWebtoons = () => {
     userFavWebtoons.forEach((webtoon) => {
       favWebtoonList.push(webtoon)
-      webtoon.genre.split(' ').forEach((genre) => {
+      webtoon.genre.forEach((genre) => {
         if (favGenreList.includes(genre)) {
         } else {
           favGenreList.push(genre)

@@ -94,8 +94,6 @@ export default function WebtoonDetailPage(): JSX.Element {
     }, delay)
   })
 
-  console.log(height)
-
   return (
     <div>
       {filteredWebtoon && (
@@ -137,21 +135,17 @@ export default function WebtoonDetailPage(): JSX.Element {
               })}
             </div>
             <div>
+              <p id="des" className={more ? '' : 'close'}>
+                {filteredWebtoon.des}
+              </p>
               {height && height >= 72 ? (
-                <div>
-                  <p id="des" className={more ? '' : 'close'}>
-                    {filteredWebtoon.des}
-                  </p>
-                  <div className="flex justify-end mt-2">
-                    <span onClick={handleMoreBtn} className="cursor-pointer text-sm text-[#a08472]">
-                      {more ? '접기' : '더보기'}
-                    </span>
-                  </div>
+                <div className="flex justify-end mt-2">
+                  <span onClick={handleMoreBtn} className="cursor-pointer text-sm text-[#a08472]">
+                    {more ? '접기' : '더보기'}
+                  </span>
                 </div>
               ) : (
-                <p id="des" className={more ? '' : 'close'}>
-                  {filteredWebtoon.des}
-                </p>
+                <></>
               )}
             </div>
           </div>

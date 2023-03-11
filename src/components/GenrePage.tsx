@@ -13,8 +13,9 @@ export default function GenrePage(): JSX.Element {
   const test: any = []
   const [page, setPage] = useState(1)
   const [showWebtoons, setShowWebtoons] = useState<IWebtoon[]>([])
-  const indexOfLastWebtoon = page * 9
-  const indexOfFirstWebtoon = indexOfLastWebtoon - 9
+  const [postPerPage] = useState(15)
+  const indexOfLastWebtoon = page * postPerPage
+  const indexOfFirstWebtoon = indexOfLastWebtoon - postPerPage
   const count = filteredWebtoons ? filteredWebtoons.length : 0
   const navigate = useNavigate()
 
@@ -40,10 +41,10 @@ export default function GenrePage(): JSX.Element {
 
   return (
     <>
-      <ul>
+      <ul className="mb-4">
         {showWebtoons?.map((webtoon) => {
           return (
-            <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5">
+            <li key={webtoon.webtoonId} className="float-left w-2/6 md:w-1/5 pb-5 pr-2">
               <div className="ml-[5px] cursor-pointer" onClick={() => navigate(`?titleID=${webtoon.webtoonId}`)}>
                 <div className="relative thumbnail rounded-md overflow-hidden">
                   <img className="aspect-[1/1.3] transition-all ease-in" src={webtoon.img} alt={webtoon.title} />
@@ -59,7 +60,7 @@ export default function GenrePage(): JSX.Element {
           )
         })}
       </ul>
-      <div className="sm:hidden">{showWebtoons.length > 0 && <Paging page={page} count={count} setPage={setPage} />}</div>
+      <div>{showWebtoons.length > 0 && <Paging page={page} count={count} setPage={setPage} />}</div>
     </>
   )
 }

@@ -12,6 +12,7 @@ import Search from './pages/Search'
 import ModalProvider from './context/UserModalContext'
 import Header from './components/Header'
 import ToggleProvider from './context/SearchToggleContext'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                   <Route path="/search" element={<Search />} />
                 </Routes>
               </section>
+              <Footer />
             </section>
           </ToggleProvider>
         </ModalProvider>

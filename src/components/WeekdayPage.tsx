@@ -34,10 +34,10 @@ export default function WeekdayPage(): JSX.Element {
   }, [weekQuery.week])
 
   return (
-    <ul>
+    <ul className="mb-4">
       {filteredWebtoons?.map((webtoon) => {
         return (
-          <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5">
+          <li key={webtoon.webtoonId} className="float-left w-2/6 sm:w-3/12 md:w-1/5 pb-5 pr-2">
             <div className="ml-[5px] cursor-pointer" onClick={() => navigate(`?titleID=${webtoon.webtoonId}`)}>
               <div className="relative thumbnail rounded-md overflow-hidden">
                 <img className="aspect-[1/1.3] transition-all ease-in" src={webtoon.img} alt={webtoon.title} />

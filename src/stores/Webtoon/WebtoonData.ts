@@ -216,7 +216,7 @@ export const WebtoonData: IWebtoon[] = [
     img: 'https://image-comic.pstatic.net/webtoon/804783/thumbnail/thumbnail_IMAG21_a80f7760-3c93-4002-84d4-eece85593f84.jpg',
     service: 'naver',
     searchKeyword: '사변괴담강태진',
-    genre: ['옴니버스 ', '스릴러'],
+    genre: ['옴니버스', '스릴러'],
     day: 'tue',
   },
   {

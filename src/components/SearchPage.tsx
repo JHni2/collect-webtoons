@@ -13,7 +13,7 @@ export default function Search(): JSX.Element {
   const test: any = []
 
   const filteredWebtoons = async () => {
-    const q = query(collection(db, 'test'))
+    const q = query(collection(db, 'webtoon'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
       if (doc.data()?.searchKeyword?.toLocaleLowerCase().indexOf(searchQuery.keyword?.toLocaleString()) != -1) {

@@ -11,6 +11,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const { user } = useContext(UserInfoContext)
   const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
+  const [heart, setheart] = useState(false)
   const test: any = []
   const navigate = useNavigate()
 
@@ -24,6 +25,7 @@ export default function WebtoonDetailPage(): JSX.Element {
       }
     })
     setFilteredWebtoon(test[0])
+    // console.log(user.wishList.some(webtoon=>{}))
   }
 
   useEffect(() => {
@@ -42,6 +44,7 @@ export default function WebtoonDetailPage(): JSX.Element {
 
     if (favWebtoons.length === 0) {
       setFavWebtoons([...favWebtoons, webtoon])
+      setheart(true)
       await updateDoc(favoriteRef, {
         wishList: [...favWebtoons, webtoon],
       })
@@ -51,11 +54,13 @@ export default function WebtoonDetailPage(): JSX.Element {
       if (favWebtoon.webtoonId === webtoon.webtoonId) {
         favWebtoons.splice(idx, 1)
         setFavWebtoons(favWebtoons)
+        setheart(false)
         await updateDoc(favoriteRef, {
           wishList: favWebtoons,
         })
       } else {
         setFavWebtoons([...favWebtoons, webtoon])
+        setheart(true)
         await updateDoc(favoriteRef, {
           wishList: [...favWebtoons, webtoon],
         })
@@ -63,24 +68,41 @@ export default function WebtoonDetailPage(): JSX.Element {
     })
   }
 
+  useEffect(() => {
+    user.wishList.forEach((webtoon) => {
+      if (webtoon.title === filteredWebtoon?.title) setheart(true)
+    })
+  }, [filteredWebtoon])
+
   return (
     <div>
       {filteredWebtoon && (
         <div>
-          <div>
-            <span>{filteredWebtoon.title}</span>
-            <span>{filteredWebtoon.author}</span>
+          <div className="flex flex-col mb-4 text-center">
+            <p className="grow font-semibold mb-1">{filteredWebtoon.title}</p>
+            <p className="text-sm">{filteredWebtoon.author}</p>
           </div>
-          <div>
+          <div className="rounded-lg overflow-hidden mb-4">
             <img src={filteredWebtoon.img} alt={filteredWebtoon.title} />
           </div>
-          <div>
-            <button onClick={() => addToFavoriteHandler(filteredWebtoon)}>관심 웹툰</button>
-            <button>웹툰 바로 가기</button>
+          <div className="flex justify-between mb-5">
+            <button className="flex items-center gap-2" onClick={() => addToFavoriteHandler(filteredWebtoon)}>
+              {heart ? (
+                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                </svg>
+              ) : (
+                <svg key={filteredWebtoon.webtoonId} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
+                  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                </svg>
+              )}
+              관심 웹툰
+            </button>
+            <button>웹툰 보러 가기</button>
           </div>
-          <div>
-            <span>{filteredWebtoon.genre}</span>
-            <span>{filteredWebtoon.des}</span>
+          <div className="mb-4">
+            <p className="text-sm mb-1">{filteredWebtoon.genre}</p>
+            <p>{filteredWebtoon.des}</p>
           </div>
         </div>
       )}

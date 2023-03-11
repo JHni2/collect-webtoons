@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { IWebtoon } from '../stores/Webtoon/types'
 
@@ -8,10 +7,8 @@ type Item = {
 }
 
 export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Element {
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth)
   const title = data.title.toLocaleLowerCase()
   const author = data.author.toLocaleLowerCase()
-  const url = innerWidth < 480 ? `${data.url.split('https://').join('https://m.')}` : data.url
   const navigate = useNavigate()
 
   const highlightedText = (text: string, keyword: string) => {
@@ -33,14 +30,6 @@ export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Elemen
     }
     return text
   }
-
-  useEffect(() => {
-    const resizeListener = () => {
-      setInnerWidth(window.innerWidth)
-    }
-    window.addEventListener('resize', resizeListener)
-    return () => window.removeEventListener('resize', resizeListener)
-  }, [])
 
   return (
     <li className="search_result_item flex gap-x-4 cursor-pointer mb-4" onClick={() => navigate(`/detail/?title=${data.webtoonId}`)}>

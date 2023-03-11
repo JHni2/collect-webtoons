@@ -82,7 +82,17 @@ export default function WebtoonDetailPage(): JSX.Element {
     setMore(!more)
   }
 
-  console.log(height)
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth)
+  const url = innerWidth < 480 ? `${filteredWebtoon?.url.split('https://').join('https://m.')}` : filteredWebtoon?.url
+  const delay = 300
+  let timer: any
+
+  window.addEventListener('resize', function () {
+    clearTimeout(timer)
+    timer = setTimeout(function () {
+      setInnerWidth(window.innerWidth)
+    }, delay)
+  })
 
   return (
     <div>
@@ -108,9 +118,11 @@ export default function WebtoonDetailPage(): JSX.Element {
               )}
               관심 웹툰
             </button>
-            <Link to={filteredWebtoon.url}>
-              <button>웹툰 보러 가기</button>
-            </Link>
+            {url && (
+              <Link to={url}>
+                <button>웹툰 보러 가기</button>
+              </Link>
+            )}
           </div>
           <div className="mb-4">
             <div className="flex gap-2 mb-2">

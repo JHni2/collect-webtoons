@@ -7,7 +7,7 @@ export default function FilterNav() {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const weeks = ['월', '화', '수', '목', '금', '토', '일']
-  const genres = ['스토리', '옴니버스', '에피소드', '드라마', '무협', '사극', '판타지', '스포츠', '액션', '일상', '로맨스', '개그', '스릴러', '학원', '코믹']
+  const genres = ['스토리', '옴니버스', '에피소드', '드라마', '무협', '사극', '판타지', '스포츠', '액션', '일상', ['로맨스'], '개그', '스릴러', '학원', '코믹']
   const services = ['naver', 'kakao']
   const d = new Date()
   const today = weeks[d.getDay() === 0 ? 6 : d.getDay() - 1]

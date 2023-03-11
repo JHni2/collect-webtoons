@@ -144,3 +144,11 @@ input[value='on']::before{
     grid-gap: 2rem 1rem;
     }
   }
+
+p.close {
+  overflow:hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

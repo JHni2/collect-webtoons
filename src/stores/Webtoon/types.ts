@@ -7,7 +7,7 @@ export interface IWebtoon {
   img: string
   service: string
   searchKeyword: string
-  genre: string
+  genre: string[]
   day: string
 }
 

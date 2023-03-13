@@ -145,11 +145,11 @@ input[value='on']::before{
     }
   }
 
-p.close {
+.close {
   overflow:hidden;
+  overflow-anchor: none;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-

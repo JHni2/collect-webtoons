@@ -12,7 +12,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   const { user } = useContext(UserInfoContext)
   const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
   const [heart, setheart] = useState(false)
-  const [height, setHeight] = useState<number | undefined>(undefined)
+  const [moreBtn, setMoreBtn] = useState(false)
   const test: any = []
   const navigate = useNavigate()
 
@@ -70,7 +70,7 @@ export default function WebtoonDetailPage(): JSX.Element {
 
   useEffect(() => {
     if (document.getElementById('des') !== null) {
-      setHeight(document.getElementById('des')?.clientHeight)
+      document.getElementById('des')?.offsetHeight !== document.getElementById('des')?.scrollHeight && setMoreBtn(true)
     }
     user.wishList.forEach((webtoon) => {
       if (webtoon.title === filteredWebtoon?.title) setheart(true)
@@ -138,14 +138,12 @@ export default function WebtoonDetailPage(): JSX.Element {
               <p id="des" className={more ? '' : 'close'}>
                 {filteredWebtoon.des}
               </p>
-              {height && height >= 72 ? (
+              {moreBtn && (
                 <div className="flex justify-end mt-2">
                   <span onClick={handleMoreBtn} className="cursor-pointer text-sm text-[#a08472]">
                     {more ? '접기' : '더보기'}
                   </span>
                 </div>
-              ) : (
-                <></>
               )}
             </div>
           </div>

@@ -102,7 +102,7 @@ export default function UserPage(): JSX.Element {
           )}
         </div>
         <div>
-          <p className="mb-3 font-semibold">{genre ? `${genre} 장르의 추천 웹툰` : '추천 웹툰'}</p>
+          <p className="mb-3 font-semibold">{genre ? `#${genre} 장르 추천 웹툰` : '추천 웹툰'}</p>
           {loading ? (
             <></>
           ) : userFavWebtoons.length > 0 ? (

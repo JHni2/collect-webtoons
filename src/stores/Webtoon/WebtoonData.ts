@@ -2,6 +2,8 @@ import { IWebtoon } from './types'
 import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 
+export const Genre = ['스토리', '에피소드', '옴니버스', '일상', '드라마', '판타지', '로맨스', '액션', '개그', '스릴러', '무협', '사극', '스포츠', '학원', '코믹']
+
 export const WebtoonData: IWebtoon[] = [
   {
     webtoonId: 648419,

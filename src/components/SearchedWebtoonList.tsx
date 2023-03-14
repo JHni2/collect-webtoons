@@ -32,7 +32,7 @@ export default function SearchedWebtoonList({ data, keyword }: Item): JSX.Elemen
   }
 
   return (
-    <li className="search_result_item flex gap-x-4 cursor-pointer mb-4" onClick={() => navigate(`/detail/?title=${data.webtoonId}`)}>
+    <li className="search_result_item flex gap-x-4 cursor-pointer mb-4" onClick={() => navigate(`/?titleID=${data.webtoonId}`)}>
       <div className="poster_thumbnail w-[60px] h-[78px] shrink-0 rounded-md overflow-hidden relative sm:w-[120px] sm:h-[156px]">
         <img className="item_poster transition-all duration-300 " src={data.img} alt={data.title} />
       </div>

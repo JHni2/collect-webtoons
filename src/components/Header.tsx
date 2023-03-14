@@ -40,7 +40,7 @@ export default function Header() {
   }, [])
 
   return (
-    <section id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-10">
+    <section id="header_wrap" className="h-[60px] w-full flex items-center border-b-[1px] p-[0_1rem] fixed bg-white z-20">
       <div id="header" className="flex justify-between items-center w-[1025px] m-[0_auto] relative gap-2">
         <h2 className="font-bold">
           <div className="text-lg whitespace-nowrap cursor-pointer" onClick={() => window.location.replace('/')}>

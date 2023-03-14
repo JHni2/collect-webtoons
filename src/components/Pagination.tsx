@@ -8,7 +8,7 @@ interface PaginationType {
 }
 
 const Paging = ({ page, count, setPage }: PaginationType) => {
-  return <Pagination activePage={page} itemsCountPerPage={9} totalItemsCount={count} pageRangeDisplayed={5} prevPageText={'‹'} nextPageText={'›'} onChange={setPage} />
+  return <Pagination activePage={page} itemsCountPerPage={15} totalItemsCount={count} pageRangeDisplayed={5} prevPageText={'‹'} nextPageText={'›'} onChange={setPage} />
 }
 
 export default Paging

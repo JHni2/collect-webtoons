@@ -11,7 +11,7 @@ export default function FilterNav() {
   const services = ['naver', 'kakao']
   const d = new Date()
   const today = weeks[d.getDay() === 0 ? 6 : d.getDay() - 1]
-  const [weekIsOpen, setWeekIsOpen] = useState(true)
+  const [weekIsOpen, setWeekIsOpen] = useState(false)
   const [genreIsOpen, setGenreIsOpen] = useState(false)
   const [serviceIsOpen, setServiceIsOpen] = useState(false)
   const navigate = useNavigate()
@@ -31,6 +31,12 @@ export default function FilterNav() {
       setServiceIsOpen(true)
     }
   }, [activeFilter])
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.search === '') {
+      setWeekIsOpen(true)
+    }
+  }, [])
 
   return (
     <div id="content" className="lg:p-0">

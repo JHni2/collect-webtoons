@@ -72,9 +72,10 @@ export default function WebtoonDetailPage(): JSX.Element {
     if (document.getElementById('des') !== null) {
       document.getElementById('des')?.offsetHeight !== document.getElementById('des')?.scrollHeight && setMoreBtn(true)
     }
-    user.wishList.forEach((webtoon) => {
-      if (webtoon.title === filteredWebtoon?.title) setheart(true)
-    })
+    user.wishList &&
+      user.wishList.forEach((webtoon) => {
+        if (webtoon.title === filteredWebtoon?.title) setheart(true)
+      })
   }, [filteredWebtoon])
 
   const [more, setMore] = useState(false)

@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        google: "url('img/google.svg')",
+        google: "url('./img/google.svg')",
       },
       transitionProperty: {
         toggleTransition: 'transform, opacity',

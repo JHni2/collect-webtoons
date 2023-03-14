@@ -48,6 +48,15 @@ export default function ServicePage(): JSX.Element {
               <div className="ml-[5px] cursor-pointer" onClick={() => navigate(`?titleID=${webtoon.webtoonId}`)}>
                 <div className="relative thumbnail rounded-md overflow-hidden">
                   <img className="aspect-[1/1.3] transition-all ease-in" src={webtoon.img} alt={webtoon.title} />
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      navigate(`/?service=${webtoon.service}`)
+                    }}
+                    className={'absolute top-0 p-[0_0.35rem_1px_0.35rem] m-1 border rounded-full text-white text-xs z-10 ' + (webtoon.service === 'kakao' ? 'bg-[#ffd200] border-[#ffd200]' : 'bg-[#00dc64] border-[#00dc64]')}
+                  >
+                    {webtoon.service}
+                  </div>
                 </div>
                 <div className="info flex flex-col gap-[.15rem] max-w-[125px] pt-1">
                   <div className="title text-sm truncate ">

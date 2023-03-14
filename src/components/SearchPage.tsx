@@ -38,7 +38,6 @@ export default function Search(): JSX.Element {
           새로운 작품을 탐색해 보세요!
         </p>
       ) : (
-        // <ul className="search_result_list flex flex-col mt-4 gap-y-5">
         <ul className="max-w-[1025px]">
           {searchedWebtoons.map((webtoon) => {
             const data: IWebtoon = webtoon

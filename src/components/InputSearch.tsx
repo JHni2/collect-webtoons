@@ -1,5 +1,6 @@
-import { ChangeEvent, useContext, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import QueryString from 'qs'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { SearchToggleContext } from '../context/SearchToggleContext'
 import { WebtoonData } from '../stores/Webtoon/WebtoonData'
 
@@ -37,6 +38,12 @@ export default function InputSearch(): JSX.Element {
     $search?.current?.classList.toggle('!opacity-100')
     $search?.current?.blur()
   }
+
+  const location = useLocation()
+
+  useEffect(() => {
+    setSearch('')
+  }, [location])
 
   return (
     <div id="search" className="relative">

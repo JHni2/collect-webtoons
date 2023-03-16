@@ -13,31 +13,34 @@ import ModalProvider from './context/UserModalContext'
 import Header from './components/Header'
 import ToggleProvider from './context/SearchToggleContext'
 import Footer from './components/Footer'
+import { RecoilRoot } from 'recoil'
 
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <UserInfoProvider>
-        <ModalProvider>
-          <ToggleProvider>
-            <section className="drawer-content">
-              <Header />
-              <section className="main flex w-full">
-                <Routes>
-                  {/* <Route path='*' element={<Error/>}/> */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/:id" element={<User />} />
-                  <Route path="/join" element={<Join />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/search" element={<Search />} />
-                </Routes>
+      <RecoilRoot>
+        <UserInfoProvider>
+          <ModalProvider>
+            <ToggleProvider>
+              <section className="drawer-content">
+                <Header />
+                <section className="main flex w-full">
+                  <Routes>
+                    {/* <Route path='*' element={<Error/>}/> */}
+                    <Route path="/" element={<Index />} />
+                    <Route path="/:id" element={<User />} />
+                    <Route path="/join" element={<Join />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/search" element={<Search />} />
+                  </Routes>
+                </section>
+                <Footer />
               </section>
-              <Footer />
-            </section>
-          </ToggleProvider>
-        </ModalProvider>
-      </UserInfoProvider>
+            </ToggleProvider>
+          </ModalProvider>
+        </UserInfoProvider>
+      </RecoilRoot>
     </BrowserRouter>
   )
 }

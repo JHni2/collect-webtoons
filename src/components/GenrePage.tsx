@@ -20,7 +20,7 @@ export default function GenrePage(): JSX.Element {
   const navigate = useNavigate()
 
   const filteringWebtoons = async () => {
-    const q = query(collection(db, 'webtoon'))
+    const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
       if (doc.data().genre.includes(genreQuery.genre)) {

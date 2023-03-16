@@ -1232,7 +1232,7 @@ export const WebtoonData: IWebtoon[] = [
 ]
 
 const addData = async (webtoon: IWebtoon) => {
-  const docRef = await setDoc(doc(db, 'webtoon', webtoon.title), {
+  const docRef = await setDoc(doc(db, 'test', webtoon.title), {
     webtoonId: webtoon.webtoonId,
     title: webtoon.title,
     author: webtoon.author,

@@ -17,7 +17,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   const navigate = useNavigate()
 
   const filteringWebtoon = async () => {
-    const q = query(collection(db, 'webtoon'))
+    const q = query(collection(db, 'test'))
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc: DocumentData) => {
       if (doc.data().webtoonId === Number(searchQuery.titleID)) {
@@ -30,42 +30,41 @@ export default function WebtoonDetailPage(): JSX.Element {
 
   useEffect(() => {
     filteringWebtoon()
-  }, [searchQuery])
+  }, [])
 
   const [favWebtoons, setFavWebtoons] = useState<IWebtoon[]>([...user.wishList])
 
   const addToFavoriteHandler = async (webtoon: IWebtoon) => {
-    const favoriteRef = doc(db, 'user', user.nickname)
-
-    if (user.nickname === '') {
+    if (user.nickname.length === 0) {
       navigate('/login')
       return
-    }
-
-    if (favWebtoons.length === 0) {
-      setFavWebtoons([...favWebtoons, webtoon])
-      setheart(true)
-      await updateDoc(favoriteRef, {
-        wishList: [...favWebtoons, webtoon],
-      })
-    }
-
-    favWebtoons.forEach(async (favWebtoon, idx) => {
-      if (favWebtoon.webtoonId === webtoon.webtoonId) {
-        favWebtoons.splice(idx, 1)
-        setFavWebtoons(favWebtoons)
-        setheart(false)
-        await updateDoc(favoriteRef, {
-          wishList: favWebtoons,
-        })
-      } else {
+    } else {
+      const favoriteRef = doc(db, 'user', user.nickname)
+      if (favWebtoons.length === 0) {
         setFavWebtoons([...favWebtoons, webtoon])
         setheart(true)
         await updateDoc(favoriteRef, {
           wishList: [...favWebtoons, webtoon],
         })
       }
-    })
+
+      favWebtoons.forEach(async (favWebtoon, idx) => {
+        if (favWebtoon.webtoonId === webtoon.webtoonId) {
+          favWebtoons.splice(idx, 1)
+          setFavWebtoons(favWebtoons)
+          setheart(false)
+          await updateDoc(favoriteRef, {
+            wishList: favWebtoons,
+          })
+        } else {
+          setFavWebtoons([...favWebtoons, webtoon])
+          setheart(true)
+          await updateDoc(favoriteRef, {
+            wishList: [...favWebtoons, webtoon],
+          })
+        }
+      })
+    }
   }
 
   useEffect(() => {

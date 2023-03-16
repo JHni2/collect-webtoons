@@ -1,6 +1,6 @@
 import { selector } from 'recoil'
 
-const webtoonsURL = 'https://firestore.googleapis.com/v1/projects/collect-webtoons/databases/(default)/documents/test'
+const webtoonsURL = 'https://firestore.googleapis.com/v1/projects/collect-webtoons/databases/(default)/documents/webtoon?pageSize=1000'
 
 export const webtoonsList = selector({
   key: 'webtoonsList',

@@ -22,7 +22,11 @@ export interface IWebtoon2 {
     img: string
     service: string
     searchKeyword: string
-    genre: string[]
+    genre: {
+      arrayValue: {
+        values: []
+      }
+    }
     day: string
   }
   name: string

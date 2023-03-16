@@ -1,54 +1,35 @@
-import { query, collection, getDocs, DocumentData } from 'firebase/firestore'
-import { db } from '../firebase'
 import QueryString from 'qs'
-import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { IWebtoon, IWebtoon2 } from '../stores/Webtoon/types'
-import Paging from './Pagination'
 import { useRecoilValueLoadable } from 'recoil'
+import { IWebtoon2 } from '../stores/Webtoon/types'
 import { webtoonsList } from '../stores/Webtoon/webtoons'
 
-export default function GenrePage(): JSX.Element {
-  const location = useLocation()
-  const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  const [filteredWebtoons, setFilteredWebtoons] = useState<IWebtoon[] | null>(null)
-  const test: any = []
-  const [page, setPage] = useState(1)
-  const [showWebtoons, setShowWebtoons] = useState<IWebtoon[]>([])
-  const [postPerPage] = useState(15)
-  const indexOfLastWebtoon = page * postPerPage
-  const indexOfFirstWebtoon = indexOfLastWebtoon - postPerPage
-  const count = filteredWebtoons ? filteredWebtoons.length : 0
-  const navigate = useNavigate()
-
+export default function WebtoonFilter(filter: { filter: string }): JSX.Element {
   const WebtoonsLoadable = useRecoilValueLoadable(webtoonsList)
   let webtoons: IWebtoon2[] = 'hasValue' === WebtoonsLoadable.state ? WebtoonsLoadable.contents.documents : []
+  const location = useLocation()
+  const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
+  const navigate = useNavigate()
 
-  webtoons = webtoons.filter((item) => {
-    for (let i = 0; i < 2; i++) {
-      if (Object.values(item.fields.genre.arrayValue.values[i])[0] === searchQuery.genre) return item
-    }
-  })
-
-  // const filteringWebtoons = async () => {
-  //   const q = query(collection(db, 'test'))
-  //   const querySnapshot = await getDocs(q)
-  //   querySnapshot.forEach((doc: DocumentData) => {
-  //     if (doc.data().genre.includes(genreQuery.genre)) {
-  //       test.push(doc.data())
-  //     }
-  //   })
-  //   setFilteredWebtoons(test)
-  //   setShowWebtoons(test.slice(indexOfFirstWebtoon, indexOfLastWebtoon))
-  // }
-
-  // useEffect(() => {
-  //   setPage(1)
-  // }, [searchQuery.genre])
-
-  // useEffect(() => {
-  //   // filteringWebtoons()
-  // }, [searchQuery.genre, page, indexOfFirstWebtoon, indexOfLastWebtoon])
+  switch (Object.values(filter)[0]) {
+    case 'week':
+      if (searchQuery.week === 'all') {
+        webtoons = WebtoonsLoadable.contents.documents
+      } else {
+        webtoons = webtoons.filter((item) => Object.values(item.fields.day)[0] === searchQuery.week)
+      }
+      break
+    case 'genre':
+      webtoons = webtoons.filter((item) => {
+        for (let i = 0; i < 2; i++) {
+          if (Object.values(item.fields.genre.arrayValue.values[i])[0] === searchQuery.genre) return item
+        }
+      })
+      break
+    case 'service':
+      webtoons = webtoons.filter((item) => Object.values(item.fields.service)[0] === searchQuery.service)
+      break
+  }
 
   return (
     <ul className="mb-4">

@@ -30,7 +30,7 @@ export default function WebtoonDetailPage(): JSX.Element {
 
   useEffect(() => {
     filteringWebtoon()
-  }, [])
+  }, [searchQuery])
 
   const [favWebtoons, setFavWebtoons] = useState<IWebtoon[]>([...user.wishList])
 

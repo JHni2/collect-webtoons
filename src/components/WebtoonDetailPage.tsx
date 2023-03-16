@@ -1,4 +1,4 @@
-import { query, collection, getDocs, DocumentData, doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import QueryString from 'qs'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -12,7 +12,6 @@ export default function WebtoonDetailPage(): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const { user } = useContext(UserInfoContext)
-  const [filteredWebtoon, setFilteredWebtoon] = useState<IWebtoon | null>(null)
   const [heart, setheart] = useState(false)
   const [moreBtn, setMoreBtn] = useState(false)
   const test: any = []
@@ -61,10 +60,11 @@ export default function WebtoonDetailPage(): JSX.Element {
       document.getElementById('des')?.offsetHeight !== document.getElementById('des')?.scrollHeight && setMoreBtn(true)
     }
     user.wishList &&
+      webtoons.length > 0 &&
       user.wishList.forEach((item) => {
-        if (item.title === filteredWebtoon?.title) setheart(true)
+        if (item.title === Object.values(webtoons[0].fields.title)[0]) setheart(true)
       })
-  }, [filteredWebtoon])
+  }, [webtoons[0]])
 
   const [more, setMore] = useState(false)
   const handleMoreBtn = () => {
@@ -72,7 +72,7 @@ export default function WebtoonDetailPage(): JSX.Element {
   }
 
   const [innerWidth, setInnerWidth] = useState(window.innerWidth)
-  const url = innerWidth < 480 ? `${filteredWebtoon?.url.split('https://').join('https://m.')}` : filteredWebtoon?.url
+  const url = webtoons.length > 0 && (innerWidth < 480 ? `${Object.values(webtoons[0].fields.url)[0].split('https://').join('https://m.')}` : Object.values(webtoons[0].fields.url)[0])
   const delay = 300
   let timer: any
 

@@ -11,10 +11,13 @@ export default function IndexPage(): JSX.Element {
 
   return (
     <>
-      <FilterNav />
-      {/* {activeFilter[0] === 'titleID' && <WebtoonDetailPage />} */}
-      {/* {activeFilter.length === 0 || activeFilter[0] === 'week' ? <WeekdayPage /> : activeFilter[0] === 'genre' ? <GenrePage /> : <ServicePage />} */}
-      <WebtoonFilter filter={activeFilter[0]} />
+      {activeFilter[0] !== 'titleID' && (
+        <>
+          <FilterNav />
+          <WebtoonFilter filter={activeFilter[0]} />
+        </>
+      )}
+      {activeFilter[0] === 'titleID' && <WebtoonDetailPage />}
     </>
   )
 }

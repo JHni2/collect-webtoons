@@ -1,37 +1,27 @@
-import { collection, DocumentData, getDocs, query } from 'firebase/firestore'
 import QueryString from 'qs'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { db } from '../firebase'
-import { IWebtoon } from '../stores/Webtoon/types'
-import SearchedWebtoonList from './SearchedWebtoonList'
+import { useRecoilValueLoadable } from 'recoil'
+import { IWebtoon, IWebtoon2 } from '../stores/Webtoon/types'
+import { webtoonsList } from '../stores/Webtoon/webtoons'
 
 export default function Search(): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  const [searchedWebtoons, setSearchedWebtoons] = useState<IWebtoon[] | null>(null)
+  const keyword = searchQuery.keyword ? searchQuery.keyword : ''
   const test: any = []
+  const WebtoonsLoadable = useRecoilValueLoadable(webtoonsList)
+  let webtoons: IWebtoon2[] = 'hasValue' === WebtoonsLoadable.state ? WebtoonsLoadable.contents.documents : []
 
-  const filteredWebtoons = async () => {
-    const q = query(collection(db, 'test'))
-    const querySnapshot = await getDocs(q)
-    querySnapshot.forEach((doc: DocumentData) => {
-      if (doc.data()?.searchKeyword?.toLocaleLowerCase().indexOf(searchQuery.keyword?.toLocaleString()) != -1) {
-        test.push(doc.data())
-      }
-    })
-    setSearchedWebtoons(test)
+  if (typeof searchQuery.keyword !== 'undefined') {
+    webtoons = webtoons.filter((item) => Object.values(item.fields.searchKeyword)[0].toLocaleLowerCase().indexOf(keyword.toLocaleString()) != -1)
   }
-
-  useEffect(() => {
-    filteredWebtoons()
-  }, [searchQuery.keyword])
 
   return (
     <div id="content" className="lg:p-0 !items-stretch">
-      {searchedWebtoons == null ? (
+      {webtoons == null ? (
         <div></div>
-      ) : searchedWebtoons.length === 0 ? (
+      ) : webtoons.length === 0 ? (
         <p className="p-[100px_0] text-center text-lg leading-[30px] font-semibold tracking-tight">
           검색 결과가 없습니다.
           <br />
@@ -39,10 +29,10 @@ export default function Search(): JSX.Element {
         </p>
       ) : (
         <ul className="max-w-[1025px]">
-          {searchedWebtoons.map((webtoon) => {
+          {/* {webtoons.map((webtoon) => {
             const data: IWebtoon = webtoon
             return <SearchedWebtoonList key={data.webtoonId} data={data} keyword={searchQuery.keyword} />
-          })}
+          })} */}
         </ul>
       )}
     </div>

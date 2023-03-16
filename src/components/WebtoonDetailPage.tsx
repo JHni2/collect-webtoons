@@ -2,7 +2,7 @@ import { query, collection, getDocs, DocumentData, doc, updateDoc } from 'fireba
 import { db } from '../firebase'
 import QueryString from 'qs'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IWebtoon, IWebtoon2 } from '../stores/Webtoon/types'
 import { UserInfoContext } from '../context/UserInfoContext'
 import { useRecoilValueLoadable } from 'recoil'
@@ -144,7 +144,7 @@ export default function WebtoonDetailPage(): JSX.Element {
               <p onClick={() => navigate(`/?service=${Object.values(webtoons[0].fields.service)[0]}`)} className={'p-[1px_6px_2px_6px] border rounded-full text-white text-sm z-10 cursor-pointer ' + (Object.values(webtoons[0].fields.service)[0] === 'kakao' ? 'bg-[#ffd200] border-[#ffd200]' : 'bg-[#00dc64] border-[#00dc64]')}>
                 {Object.values(webtoons[0].fields.service)[0]}
               </p>
-              {webtoons[0].fields.genre.arrayValue.values.map((genre, idx) => {
+              {webtoons[0].fields.genre.arrayValue.values.map((genre, idx): React.ReactNode => {
                 return (
                   <p key={idx} onClick={() => navigate(`/?genre=${Object.values(genre)[0]}`)} className="inline-block text-sm border rounded-full p-[2px_6px] text-zinc-400 border-zinc-400 cursor-pointer">
                     {Object.values(genre)[0]}

@@ -1,9 +1,9 @@
 import QueryString from 'qs'
-import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useRecoilValueLoadable } from 'recoil'
-import { IWebtoon, IWebtoon2 } from '../stores/Webtoon/types'
+import { IWebtoon2 } from '../stores/Webtoon/types'
 import { webtoonsList } from '../stores/Webtoon/webtoons'
+import SearchedWebtoonList from './SearchedWebtoonList'
 
 export default function Search(): JSX.Element {
   const location = useLocation()
@@ -29,10 +29,10 @@ export default function Search(): JSX.Element {
         </p>
       ) : (
         <ul className="max-w-[1025px]">
-          {/* {webtoons.map((webtoon) => {
-            const data: IWebtoon = webtoon
-            return <SearchedWebtoonList key={data.webtoonId} data={data} keyword={searchQuery.keyword} />
-          })} */}
+          {webtoons.map((webtoon) => {
+            const data: IWebtoon2 = webtoon
+            return <SearchedWebtoonList key={Object.values(data.fields.webtoonId)[0]} data={data} keyword={searchQuery.keyword} />
+          })}
         </ul>
       )}
     </div>

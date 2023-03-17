@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { doc, setDoc, collection, getDocs, query, where } from 'firebase/firestore'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext'
@@ -18,6 +18,7 @@ export default function LoginPage(): JSX.Element {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm()
 
@@ -81,6 +82,16 @@ export default function LoginPage(): JSX.Element {
       })
   }
 
+  const pwRef = useRef()
+  pwRef.current = watch('pw')
+
+  const emailRef = useRef()
+  emailRef.current = watch('email')
+
+  useEffect(() => {
+    setErrorMsg('')
+  }, [emailRef.current, pwRef.current])
+
   return (
     <>
       {loading && <Loading show={loading} onHide={() => setLoading(false)} />}
@@ -115,7 +126,7 @@ export default function LoginPage(): JSX.Element {
               })}
             ></input>
             {errors.pw && errors.pw.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
-            {errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
+            {!errors.pw && errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
           </div>
           <div className="keep_check relative pl-6 leading-4 whitespace-nowrap">
             <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none cursor-pointer" type="checkbox" onChange={() => setChecked(!checked)}></input>

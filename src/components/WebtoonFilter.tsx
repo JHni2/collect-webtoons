@@ -5,6 +5,7 @@ import { useRecoilValueLoadable } from 'recoil'
 import { IWebtoon2 } from '../stores/Webtoon/types'
 import { webtoonsList } from '../stores/Webtoon/webtoons'
 import Paging from './Pagination'
+import { Week } from '../constants/week'
 
 export default function WebtoonFilter(filter: { filter: string }): JSX.Element {
   const WebtoonsLoadable = useRecoilValueLoadable(webtoonsList)
@@ -12,6 +13,12 @@ export default function WebtoonFilter(filter: { filter: string }): JSX.Element {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
   const navigate = useNavigate()
+  const d = new Date()
+  const today = Object.values(Week)[d.getDay() === 0 ? 6 : d.getDay() - 1]
+
+  if (location.search.length === 0) {
+    webtoons = webtoons.filter((item) => Object.values(item.fields.day)[0] === today)
+  }
 
   switch (Object.values(filter)[0]) {
     case 'week':

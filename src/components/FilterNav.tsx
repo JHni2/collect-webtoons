@@ -6,11 +6,10 @@ import { Week } from '../constants/week'
 export default function FilterNav() {
   const location = useLocation()
   const searchQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
-  const weeks = ['월', '화', '수', '목', '금', '토', '일']
   const genres = ['스토리', '옴니버스', '에피소드', '드라마', '무협', '사극', '판타지', '스포츠', '액션', '일상', ['로맨스'], '개그', '스릴러', '학원', '코믹']
   const services = ['naver', 'kakao']
   const d = new Date()
-  const today = weeks[d.getDay() === 0 ? 6 : d.getDay() - 1]
+  const today = Object.keys(Week)[d.getDay() === 0 ? 6 : d.getDay() - 1]
   const [weekIsOpen, setWeekIsOpen] = useState(false)
   const [genreIsOpen, setGenreIsOpen] = useState(false)
   const [serviceIsOpen, setServiceIsOpen] = useState(false)
@@ -78,7 +77,7 @@ export default function FilterNav() {
             <li className={searchQuery.week === 'all' ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer hidden sm:block' : 'p-[3px_9px] hidden sm:block cursor-pointer'} onClick={() => navigate(`/?week=all`)}>
               요일전체
             </li>
-            {weeks.map((week, index) => {
+            {Object.keys(Week).map((week, index) => {
               return (
                 <li onClick={() => navigate(`/?week=${Week[week]}`)} key={index} className={searchQuery.week == undefined ? (week === today ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer') : searchQuery.week === Week[week] ? 'p-[3px_9px] bg-[#e5e7eb] rounded-full cursor-pointer' : 'p-[3px_9px] cursor-pointer'}>
                   {week}

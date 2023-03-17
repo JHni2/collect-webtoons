@@ -39,7 +39,6 @@ export default function LoginPage(): JSX.Element {
           profileImg: '',
         })
         navigate('/')
-        window.location.replace('/')
       })
       .catch((e) => {
         if (e.code == 'auth/wrong-password' || e.code == 'auth/user-not-found') {

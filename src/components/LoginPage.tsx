@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
-import { doc, setDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { doc, setDoc, collection, getDocs, query, where, DocumentData } from 'firebase/firestore'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -22,6 +22,14 @@ export default function LoginPage(): JSX.Element {
     formState: { errors },
   } = useForm()
 
+  const findUserInfo = async (email: string) => {
+    const q = query(collection(db, 'user'), where('email', '==', email))
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc: DocumentData) => {
+      setUser(doc.data())
+    })
+  }
+
   const onSubmit = async (data: any) => {
     setErrorMsg('')
     await signInWithEmailAndPassword(auth, data.email, data.pw)
@@ -32,12 +40,7 @@ export default function LoginPage(): JSX.Element {
         } else {
           sessionStorage.setItem('loggedInfo', data.email)
         }
-        setUser({
-          email: data.email,
-          nickname: '',
-          wishList: [],
-          profileImg: '',
-        })
+        findUserInfo(data.email)
         navigate('/')
       })
       .catch((e) => {

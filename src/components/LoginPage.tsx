@@ -115,7 +115,7 @@ export default function LoginPage(): JSX.Element {
               })}
             ></input>
             {errors.pw && errors.pw.type === 'required' && <div className="text-red-500	text-sm">비밀번호를 입력해 주세요.</div>}
-            {errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
+            {!errors.pw && errorMsg && <div className="text-red-500	text-sm">이메일 또는 비밀번호를 잘못 입력했습니다.</div>}
           </div>
           <div className="keep_check relative pl-6 leading-4 whitespace-nowrap">
             <input value={checked ? 'on' : 'off'} id="keep" className="input_keep appearance-none cursor-pointer" type="checkbox" onChange={() => setChecked(!checked)}></input>

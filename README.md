@@ -53,5 +53,7 @@ Install NPM packages 👉🏻 `npm install`
    
 ## 🌱 Contact
 Jihyun Kim (김지현)  
-[Project github](https://github.com/JHni2/collect-webtoons)
-[Project Notion](https://www.notion.so/022553c3f00a4530adc305b968811d7a?pvs=4)
+
+[project Github](https://github.com/JHni2/collect-webtoons)
+
+[project Notion](https://www.notion.so/022553c3f00a4530adc305b968811d7a)
